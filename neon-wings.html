@@ -925,7 +925,8 @@
                 <div class="help-section">
                     <div class="help-section-title">🎯 OBJECTIVE</div>
                     <p class="help-text">Destroy the <b>Serpent Boss</b> (the head) to clear each wave. Survive all
-                        <b>30 waves</b> to defeat the <b>Omega Serpent</b> and win!</p>
+                        <b>30 waves</b> to defeat the <b>Omega Serpent</b> and win!
+                    </p>
                 </div>
 
                 <div class="help-section">
@@ -1321,13 +1322,20 @@
                 const effectiveWave = Math.min(wave, 50); // Cap at wave 50
                 const base = 0.3;
                 const scaleFactor = Math.pow(1.12, effectiveWave); // 12% faster per wave
-                return Math.min(base * scaleFactor, 4.0); // Cap at 4.0 (was 10)
+
+                // NERF: Cap max speed at 2.5 (was 4.0) and force slow speed for Omega Boss
+                if (wave >= SUPER_BOSS_WAVE) return 1.8; // Heavy, slow boss feel
+                return Math.min(base * scaleFactor, 2.5);
             }
 
             function getDescendInterval(wave) {
                 // Faster descent, but floor at 800ms for human reaction
                 // Wave 1: 3500ms, Wave 10: 2200ms, Wave 30+: 800ms
                 const effectiveWave = Math.min(wave, 50);
+
+                // NERF: Slower descent for Omega Boss to give reaction time
+                if (wave >= SUPER_BOSS_WAVE) return 2500; // 2.5s descent interval for boss
+
                 return Math.max(800, 3500 - effectiveWave * 100 - Math.pow(effectiveWave, 1.2) * 3);
             }
 
