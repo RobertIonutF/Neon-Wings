@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Neon Wings</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
     <style>
         :root {
             --cyan: #00ffff;
@@ -18,11 +20,15 @@
             --border: rgba(0, 255, 255, 0.15);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             background: var(--bg);
-            background-image: 
+            background-image:
                 radial-gradient(ellipse at 50% 0%, rgba(0, 100, 150, 0.15) 0%, transparent 50%),
                 radial-gradient(ellipse at 50% 100%, rgba(100, 0, 80, 0.1) 0%, transparent 40%);
             overflow: hidden;
@@ -40,7 +46,9 @@
             justify-content: center;
         }
 
-        canvas { display: block; }
+        canvas {
+            display: block;
+        }
 
         .hud {
             position: absolute;
@@ -57,7 +65,7 @@
             justify-content: space-between;
             align-items: center;
             padding: 0 16px;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%);
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6) 0%, transparent 100%);
         }
 
         .stat {
@@ -70,7 +78,7 @@
         .stat-label {
             font-size: 9px;
             letter-spacing: 3px;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             text-transform: uppercase;
         }
 
@@ -81,8 +89,13 @@
             line-height: 1;
         }
 
-        .stat-value.score { color: var(--yellow); }
-        .stat-value.wave { color: var(--pink); }
+        .stat-value.score {
+            color: var(--yellow);
+        }
+
+        .stat-value.wave {
+            color: var(--pink);
+        }
 
         .boss-hp {
             top: 0;
@@ -98,13 +111,15 @@
             z-index: 15;
         }
 
-        .boss-hp.show { display: flex; }
+        .boss-hp.show {
+            display: flex;
+        }
 
         .boss-hp-info {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(0,0,0,0.5);
+            background: rgba(0, 0, 0, 0.5);
             padding: 3px 12px;
             border-radius: 0 0 4px 4px;
         }
@@ -129,7 +144,7 @@
         .boss-hp-bar {
             width: 100%;
             height: 4px;
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
             overflow: hidden;
         }
 
@@ -148,12 +163,12 @@
         .boss-pip {
             width: 6px;
             height: 3px;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 1px;
         }
 
-        .boss-pip.on { 
-            background: var(--pink); 
+        .boss-pip.on {
+            background: var(--pink);
             box-shadow: 0 0 4px var(--pink);
         }
 
@@ -185,11 +200,30 @@
             transform: translateY(-2px);
         }
 
-        .pwr.on.rapid { border-color: var(--yellow); background: rgba(255,255,0,0.1); }
-        .pwr.on.spread { border-color: var(--cyan); background: rgba(0,255,255,0.1); }
-        .pwr.on.damage { border-color: var(--pink); background: rgba(255,0,128,0.1); }
-        .pwr.on.multi { border-color: var(--green); background: rgba(0,255,136,0.1); }
-        .pwr.on.rocket { border-color: var(--red); background: rgba(255,50,50,0.1); }
+        .pwr.on.rapid {
+            border-color: var(--yellow);
+            background: rgba(255, 255, 0, 0.1);
+        }
+
+        .pwr.on.spread {
+            border-color: var(--cyan);
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        .pwr.on.damage {
+            border-color: var(--pink);
+            background: rgba(255, 0, 128, 0.1);
+        }
+
+        .pwr.on.multi {
+            border-color: var(--green);
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .pwr.on.rocket {
+            border-color: var(--red);
+            background: rgba(255, 50, 50, 0.1);
+        }
 
         .pwr-lvl {
             position: absolute;
@@ -209,8 +243,14 @@
             justify-content: center;
         }
 
-        .pwr.on .pwr-lvl { display: flex; }
-        .pwr.rocket .pwr-lvl { background: var(--red); color: #fff; }
+        .pwr.on .pwr-lvl {
+            display: flex;
+        }
+
+        .pwr.rocket .pwr-lvl {
+            background: var(--red);
+            color: #fff;
+        }
 
         .combo-display {
             top: 50%;
@@ -224,7 +264,9 @@
             transition: opacity 0.2s;
         }
 
-        .combo-display.on { opacity: 1; }
+        .combo-display.on {
+            opacity: 1;
+        }
 
         .wave-msg {
             top: 50%;
@@ -238,13 +280,28 @@
             pointer-events: none;
         }
 
-        .wave-msg.show { animation: waveAnim 1.8s ease-out forwards; }
+        .wave-msg.show {
+            animation: waveAnim 1.8s ease-out forwards;
+        }
 
         @keyframes waveAnim {
-            0% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
-            15% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-            75% { opacity: 1; }
-            100% { opacity: 0; }
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.5);
+            }
+
+            15% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            75% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
         }
 
         .screen {
@@ -260,7 +317,9 @@
             text-align: center;
         }
 
-        .screen.hide { display: none; }
+        .screen.hide {
+            display: none;
+        }
 
         .title {
             font-family: 'Orbitron', sans-serif;
@@ -275,7 +334,7 @@
         .subtitle {
             font-size: 11px;
             letter-spacing: 6px;
-            color: rgba(255,255,255,0.35);
+            color: rgba(255, 255, 255, 0.35);
             text-transform: uppercase;
             margin-bottom: 48px;
         }
@@ -290,18 +349,21 @@
 
         .final-wave {
             font-size: 14px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             margin-bottom: 48px;
         }
 
         .help {
             font-size: 12px;
-            color: rgba(255,255,255,0.3);
+            color: rgba(255, 255, 255, 0.3);
             line-height: 2;
             margin-bottom: 48px;
         }
 
-        .help b { color: var(--cyan); font-weight: 400; }
+        .help b {
+            color: var(--cyan);
+            font-weight: 400;
+        }
 
         .btn {
             font-family: 'Orbitron', sans-serif;
@@ -316,7 +378,10 @@
             transition: all 0.25s ease;
         }
 
-        .btn:hover { background: var(--pink); color: #000; }
+        .btn:hover {
+            background: var(--pink);
+            color: #000;
+        }
 
         .save-status {
             margin-top: 12px;
@@ -370,7 +435,9 @@
             padding: 20px;
         }
 
-        .shop-screen.hide { display: none; }
+        .shop-screen.hide {
+            display: none;
+        }
 
         .shop-title {
             font-family: 'Orbitron', sans-serif;
@@ -385,7 +452,7 @@
         .shop-score {
             font-family: 'Share Tech Mono', monospace;
             font-size: 14px;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             margin-bottom: 24px;
         }
 
@@ -408,14 +475,14 @@
             align-items: center;
             gap: 12px;
             padding: 12px 16px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 8px;
             transition: all 0.2s ease;
         }
 
         .shop-item:hover {
-            background: rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.06);
         }
 
         .shop-item-icon {
@@ -438,7 +505,7 @@
 
         .shop-item-level {
             font-size: 10px;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             margin-top: 2px;
         }
 
@@ -463,9 +530,9 @@
         }
 
         .shop-buy-btn.cannot-afford {
-            border-color: rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.02);
-            color: rgba(255,255,255,0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.02);
+            color: rgba(255, 255, 255, 0.3);
             cursor: not-allowed;
         }
 
@@ -479,7 +546,7 @@
         .shop-close {
             margin-top: 24px;
             font-size: 11px;
-            color: rgba(255,255,255,0.4);
+            color: rgba(255, 255, 255, 0.4);
             letter-spacing: 2px;
         }
 
@@ -488,11 +555,25 @@
         }
 
         /* Item-specific colors */
-        .shop-item.rapid .shop-item-name { color: var(--yellow); }
-        .shop-item.spread .shop-item-name { color: var(--cyan); }
-        .shop-item.damage .shop-item-name { color: var(--pink); }
-        .shop-item.multi .shop-item-name { color: var(--green); }
-        .shop-item.rocket .shop-item-name { color: var(--red); }
+        .shop-item.rapid .shop-item-name {
+            color: var(--yellow);
+        }
+
+        .shop-item.spread .shop-item-name {
+            color: var(--cyan);
+        }
+
+        .shop-item.damage .shop-item-name {
+            color: var(--pink);
+        }
+
+        .shop-item.multi .shop-item-name {
+            color: var(--green);
+        }
+
+        .shop-item.rocket .shop-item-name {
+            color: var(--red);
+        }
 
         /* Victory Screen */
         .victory-title {
@@ -510,8 +591,17 @@
         }
 
         @keyframes victoryPulse {
-            0%, 100% { transform: scale(1); filter: brightness(1); }
-            50% { transform: scale(1.05); filter: brightness(1.2); }
+
+            0%,
+            100% {
+                transform: scale(1);
+                filter: brightness(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+                filter: brightness(1.2);
+            }
         }
 
         .victory-subtitle {
@@ -529,8 +619,15 @@
         }
 
         @keyframes superBossPulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
         }
 
         /* === OPTIONS & HOW TO PLAY === */
@@ -559,12 +656,14 @@
             color: #000;
         }
 
-        .options-screen, .help-screen {
+        .options-screen,
+        .help-screen {
             overflow-y: auto;
             max-height: 100vh;
         }
 
-        .options-title, .help-title {
+        .options-title,
+        .help-title {
             font-family: 'Orbitron', sans-serif;
             font-size: 24px;
             font-weight: 900;
@@ -584,7 +683,7 @@
             font-size: 10px;
             font-weight: 700;
             letter-spacing: 3px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
             margin-bottom: 12px;
             text-transform: uppercase;
         }
@@ -601,17 +700,17 @@
             font-size: 10px;
             font-weight: 700;
             padding: 10px 16px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.03);
-            color: rgba(255,255,255,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.03);
+            color: rgba(255, 255, 255, 0.5);
             cursor: pointer;
             transition: all 0.2s ease;
             border-radius: 4px;
         }
 
         .option-btn:hover {
-            border-color: rgba(255,255,255,0.4);
-            color: rgba(255,255,255,0.8);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.8);
         }
 
         .option-btn.selected {
@@ -621,10 +720,29 @@
             box-shadow: 0 0 15px rgba(0, 255, 136, 0.3);
         }
 
-        .option-btn.selected.easy { border-color: var(--green); color: var(--green); background: rgba(0,255,136,0.15); }
-        .option-btn.selected.normal { border-color: var(--cyan); color: var(--cyan); background: rgba(0,255,255,0.15); }
-        .option-btn.selected.hard { border-color: var(--orange); color: var(--orange); background: rgba(255,136,0,0.15); }
-        .option-btn.selected.extreme { border-color: var(--red); color: var(--red); background: rgba(255,51,51,0.15); }
+        .option-btn.selected.easy {
+            border-color: var(--green);
+            color: var(--green);
+            background: rgba(0, 255, 136, 0.15);
+        }
+
+        .option-btn.selected.normal {
+            border-color: var(--cyan);
+            color: var(--cyan);
+            background: rgba(0, 255, 255, 0.15);
+        }
+
+        .option-btn.selected.hard {
+            border-color: var(--orange);
+            color: var(--orange);
+            background: rgba(255, 136, 0, 0.15);
+        }
+
+        .option-btn.selected.extreme {
+            border-color: var(--red);
+            color: var(--red);
+            background: rgba(255, 51, 51, 0.15);
+        }
 
         .help-content {
             text-align: left;
@@ -643,13 +761,13 @@
             color: var(--pink);
             letter-spacing: 2px;
             margin-bottom: 10px;
-            border-bottom: 1px solid rgba(255,0,128,0.3);
+            border-bottom: 1px solid rgba(255, 0, 128, 0.3);
             padding-bottom: 6px;
         }
 
         .help-text {
             font-size: 12px;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255, 255, 255, 0.7);
             line-height: 1.8;
         }
 
@@ -662,7 +780,7 @@
             display: flex;
             justify-content: space-between;
             padding: 4px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .help-key {
@@ -672,7 +790,7 @@
         }
 
         .help-desc {
-            color: rgba(255,255,255,0.6);
+            color: rgba(255, 255, 255, 0.6);
             font-size: 11px;
         }
 
@@ -701,16 +819,31 @@
 
         .powerup-desc {
             font-size: 10px;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
         }
 
-        .powerup-row.rapid .powerup-name { color: var(--yellow); }
-        .powerup-row.spread .powerup-name { color: var(--cyan); }
-        .powerup-row.damage .powerup-name { color: var(--pink); }
-        .powerup-row.multi .powerup-name { color: var(--green); }
-        .powerup-row.rocket .powerup-name { color: var(--red); }
+        .powerup-row.rapid .powerup-name {
+            color: var(--yellow);
+        }
+
+        .powerup-row.spread .powerup-name {
+            color: var(--cyan);
+        }
+
+        .powerup-row.damage .powerup-name {
+            color: var(--pink);
+        }
+
+        .powerup-row.multi .powerup-name {
+            color: var(--green);
+        }
+
+        .powerup-row.rocket .powerup-name {
+            color: var(--red);
+        }
     </style>
 </head>
+
 <body>
     <div id="game">
         <canvas id="c"></canvas>
@@ -727,7 +860,9 @@
         </div>
 
         <div class="hud boss-hp" id="bossHP">
-            <div class="boss-hp-bar"><div class="boss-hp-fill" id="bossBar"></div></div>
+            <div class="boss-hp-bar">
+                <div class="boss-hp-fill" id="bossBar"></div>
+            </div>
             <div class="boss-hp-info">
                 <div class="boss-hp-title">SERPENT BOSS</div>
                 <div class="boss-hp-value" id="bossHPValue">0 / 0</div>
@@ -760,7 +895,7 @@
         <!-- OPTIONS SCREEN -->
         <div class="screen hide options-screen" id="optionsScreen">
             <h1 class="options-title">⚙️ OPTIONS</h1>
-            
+
             <div class="option-group">
                 <div class="option-label">Fire Mode</div>
                 <div class="option-buttons">
@@ -768,7 +903,7 @@
                     <button class="option-btn selected" id="optManual" data-mode="manual">MANUAL</button>
                 </div>
             </div>
-            
+
             <div class="option-group">
                 <div class="option-label">Difficulty</div>
                 <div class="option-buttons">
@@ -778,50 +913,81 @@
                     <button class="option-btn extreme" id="optExtreme" data-diff="extreme">EXTREME</button>
                 </div>
             </div>
-            
+
             <button class="btn" id="optionsBackBtn" style="margin-top: 24px;">BACK</button>
         </div>
 
         <!-- HOW TO PLAY SCREEN -->
         <div class="screen hide help-screen" id="helpScreen">
             <h1 class="help-title">📖 HOW TO PLAY</h1>
-            
+
             <div class="help-content">
                 <div class="help-section">
                     <div class="help-section-title">🎯 OBJECTIVE</div>
-                    <p class="help-text">Destroy the <b>Serpent Boss</b> (the head) to clear each wave. Survive all <b>200 waves</b> to defeat the <b>Omega Serpent</b> and win!</p>
+                    <p class="help-text">Destroy the <b>Serpent Boss</b> (the head) to clear each wave. Survive all
+                        <b>30 waves</b> to defeat the <b>Omega Serpent</b> and win!</p>
                 </div>
-                
+
                 <div class="help-section">
                     <div class="help-section-title">🎮 CONTROLS</div>
-                    <div class="help-row"><span class="help-key">MOUSE</span><span class="help-desc">Move ship</span></div>
-                    <div class="help-row"><span class="help-key">ARROWS / WASD</span><span class="help-desc">Move ship</span></div>
-                    <div class="help-row"><span class="help-key">LEFT CLICK</span><span class="help-desc">Fire bullets (Manual mode)</span></div>
-                    <div class="help-row"><span class="help-key">RIGHT CLICK / SPACE</span><span class="help-desc">Fire rockets</span></div>
+                    <div class="help-row"><span class="help-key">MOUSE</span><span class="help-desc">Move ship</span>
+                    </div>
+                    <div class="help-row"><span class="help-key">ARROWS / WASD</span><span class="help-desc">Move
+                            ship</span></div>
+                    <div class="help-row"><span class="help-key">LEFT CLICK</span><span class="help-desc">Fire bullets
+                            (Manual mode)</span></div>
+                    <div class="help-row"><span class="help-key">RIGHT CLICK / SPACE</span><span class="help-desc">Fire
+                            rockets</span></div>
                     <div class="help-row"><span class="help-key">S</span><span class="help-desc">Open shop</span></div>
-                    <div class="help-row"><span class="help-key">ESC</span><span class="help-desc">Pause game</span></div>
+                    <div class="help-row"><span class="help-key">ESC</span><span class="help-desc">Pause game</span>
+                    </div>
                 </div>
-                
+
                 <div class="help-section">
                     <div class="help-section-title">⭐ POWER-UPS</div>
-                    <div class="powerup-row rapid"><span class="powerup-icon">⚡</span><div class="powerup-info"><div class="powerup-name">RAPID FIRE</div><div class="powerup-desc">Faster shooting speed</div></div></div>
-                    <div class="powerup-row spread"><span class="powerup-icon">◇</span><div class="powerup-info"><div class="powerup-name">SPREAD SHOT</div><div class="powerup-desc">Multiple bullet angles</div></div></div>
-                    <div class="powerup-row damage"><span class="powerup-icon">💥</span><div class="powerup-info"><div class="powerup-name">DAMAGE BOOST</div><div class="powerup-desc">More damage per bullet</div></div></div>
-                    <div class="powerup-row multi"><span class="powerup-icon">⬡</span><div class="powerup-info"><div class="powerup-name">MULTI SHOT</div><div class="powerup-desc">Parallel bullet streams</div></div></div>
-                    <div class="powerup-row rocket"><span class="powerup-icon">🚀</span><div class="powerup-info"><div class="powerup-name">ROCKETS</div><div class="powerup-desc">Explosive AoE damage</div></div></div>
+                    <div class="powerup-row rapid"><span class="powerup-icon">⚡</span>
+                        <div class="powerup-info">
+                            <div class="powerup-name">RAPID FIRE</div>
+                            <div class="powerup-desc">Faster shooting speed</div>
+                        </div>
+                    </div>
+                    <div class="powerup-row spread"><span class="powerup-icon">◇</span>
+                        <div class="powerup-info">
+                            <div class="powerup-name">SPREAD SHOT</div>
+                            <div class="powerup-desc">Multiple bullet angles</div>
+                        </div>
+                    </div>
+                    <div class="powerup-row damage"><span class="powerup-icon">💥</span>
+                        <div class="powerup-info">
+                            <div class="powerup-name">DAMAGE BOOST</div>
+                            <div class="powerup-desc">More damage per bullet</div>
+                        </div>
+                    </div>
+                    <div class="powerup-row multi"><span class="powerup-icon">⬡</span>
+                        <div class="powerup-info">
+                            <div class="powerup-name">MULTI SHOT</div>
+                            <div class="powerup-desc">Parallel bullet streams</div>
+                        </div>
+                    </div>
+                    <div class="powerup-row rocket"><span class="powerup-icon">🚀</span>
+                        <div class="powerup-info">
+                            <div class="powerup-name">ROCKETS</div>
+                            <div class="powerup-desc">Explosive AoE damage</div>
+                        </div>
+                    </div>
                 </div>
-                
+
                 <div class="help-section">
                     <div class="help-section-title">💡 TIPS</div>
                     <p class="help-text">
                         • Kill <b>tail segments far from the head</b> for massive pushback!<br>
                         • Press <b>S</b> to buy upgrades with your score<br>
                         • The snake gets <b>faster</b> each wave - stay alert!<br>
-                        • Wave 200 features the <b>Omega Serpent</b> super boss
+                        • Wave 30 features the <b>Omega Serpent</b> super boss
                     </p>
                 </div>
             </div>
-            
+
             <button class="btn" id="helpBackBtn" style="margin-top: 16px;">BACK</button>
         </div>
 
@@ -836,7 +1002,7 @@
             <h1 class="victory-title">🌟 VICTORY 🌟</h1>
             <p class="victory-subtitle">OMEGA SERPENT DESTROYED</p>
             <div class="final-score" id="victoryScore">0</div>
-            <div class="final-wave">All 200 Waves Completed!</div>
+            <div class="final-wave">All 30 Waves Completed!</div>
             <p style="color: rgba(255,255,255,0.5); margin: 24px 0; font-size: 12px;">You have mastered Neon Wings</p>
             <button class="btn" id="victoryRestartBtn">PLAY AGAIN</button>
         </div>
@@ -847,17 +1013,18 @@
             <button class="btn" id="resumeBtn">RESUME</button>
             <button class="btn" id="saveBtn" style="margin-top: 12px;">SAVE GAME</button>
             <button class="btn-secondary" id="pauseHelpBtn" style="margin-top: 12px;">HOW TO PLAY</button>
-            <button class="btn" id="restartBtn" style="margin-top: 12px; border-color: var(--orange); color: var(--orange);">RESTART</button>
+            <button class="btn" id="restartBtn"
+                style="margin-top: 12px; border-color: var(--orange); color: var(--orange);">RESTART</button>
             <p class="save-status" id="saveStatus"></p>
         </div>
 
         <!-- SHOP UI -->
         <button class="shop-btn" id="shopBtn" title="Shop (S)">🛒</button>
-        
+
         <div class="shop-screen hide" id="shopScreen">
             <h1 class="shop-title">⚡ NEON SHOP ⚡</h1>
             <p class="shop-score">Your Score: <span id="shopScore">0</span></p>
-            
+
             <div class="shop-items">
                 <div class="shop-item rapid">
                     <span class="shop-item-icon">⚡</span>
@@ -867,7 +1034,7 @@
                     </div>
                     <button class="shop-buy-btn" id="buyRapid" data-type="rapid">0</button>
                 </div>
-                
+
                 <div class="shop-item spread">
                     <span class="shop-item-icon">◇</span>
                     <div class="shop-item-info">
@@ -876,7 +1043,7 @@
                     </div>
                     <button class="shop-buy-btn" id="buySpread" data-type="spread">0</button>
                 </div>
-                
+
                 <div class="shop-item damage">
                     <span class="shop-item-icon">💥</span>
                     <div class="shop-item-info">
@@ -885,7 +1052,7 @@
                     </div>
                     <button class="shop-buy-btn" id="buyDamage" data-type="damage">0</button>
                 </div>
-                
+
                 <div class="shop-item multi">
                     <span class="shop-item-icon">⬡</span>
                     <div class="shop-item-info">
@@ -894,7 +1061,7 @@
                     </div>
                     <button class="shop-buy-btn" id="buyMulti" data-type="multi">0</button>
                 </div>
-                
+
                 <div class="shop-item rocket">
                     <span class="shop-item-icon">🚀</span>
                     <div class="shop-item-info">
@@ -904,1487 +1071,1488 @@
                     <button class="shop-buy-btn" id="buyRocket" data-type="rocket">+5 for 50</button>
                 </div>
             </div>
-            
+
             <p class="shop-close">Press <b>S</b> or click outside to close</p>
         </div>
     </div>
 
     <script>
-    (function() {
-        'use strict';
+        (function () {
+            'use strict';
 
-        const canvas = document.getElementById('c');
-        const ctx = canvas.getContext('2d', { alpha: false });
+            const canvas = document.getElementById('c');
+            const ctx = canvas.getContext('2d', { alpha: false });
 
-        const DOM = {
-            score: document.getElementById('score'),
-            wave: document.getElementById('wave'),
-            bossHP: document.getElementById('bossHP'),
-            bossBar: document.getElementById('bossBar'),
-            bossHPValue: document.getElementById('bossHPValue'),
-            bossPips: document.getElementById('bossPips'),
-            combo: document.getElementById('combo'),
-            waveMsg: document.getElementById('waveMsg'),
-            startScreen: document.getElementById('startScreen'),
-            overScreen: document.getElementById('overScreen'),
-            endScore: document.getElementById('endScore'),
-            endWave: document.getElementById('endWave'),
-            victoryScreen: document.getElementById('victoryScreen'),
-            victoryScore: document.getElementById('victoryScore'),
-            victoryRestartBtn: document.getElementById('victoryRestartBtn'),
-            pauseScreen: document.getElementById('pauseScreen'),
-            bossTitle: document.querySelector('.boss-hp-title'),
-            pwrRapid: document.getElementById('pwrRapid'),
-            pwrSpread: document.getElementById('pwrSpread'),
-            pwrDamage: document.getElementById('pwrDamage'),
-            pwrMulti: document.getElementById('pwrMulti'),
-            pwrRocket: document.getElementById('pwrRocket'),
-            rapidLvl: document.getElementById('rapidLvl'),
-            spreadLvl: document.getElementById('spreadLvl'),
-            damageLvl: document.getElementById('damageLvl'),
-            multiLvl: document.getElementById('multiLvl'),
-            rocketLvl: document.getElementById('rocketLvl'),
-            continueBtn: document.getElementById('continueBtn'),
-            pauseHelpBtn: document.getElementById('pauseHelpBtn'),
-            // Shop elements
-            shopBtn: document.getElementById('shopBtn'),
-            shopScreen: document.getElementById('shopScreen'),
-            shopScore: document.getElementById('shopScore'),
-            shopRapidLvl: document.getElementById('shopRapidLvl'),
-            shopSpreadLvl: document.getElementById('shopSpreadLvl'),
-            shopDamageLvl: document.getElementById('shopDamageLvl'),
-            shopMultiLvl: document.getElementById('shopMultiLvl'),
-            shopRocketLvl: document.getElementById('shopRocketLvl'),
-            buyRapid: document.getElementById('buyRapid'),
-            buySpread: document.getElementById('buySpread'),
-            buyDamage: document.getElementById('buyDamage'),
-            buyMulti: document.getElementById('buyMulti'),
-            buyRocket: document.getElementById('buyRocket'),
-            // Options & Help screens
-            optionsScreen: document.getElementById('optionsScreen'),
-            helpScreen: document.getElementById('helpScreen'),
-            optionsBtn: document.getElementById('optionsBtn'),
-            helpBtn: document.getElementById('helpBtn'),
-            optionsBackBtn: document.getElementById('optionsBackBtn'),
-            helpBackBtn: document.getElementById('helpBackBtn'),
-            // Option buttons
-            optAutomatic: document.getElementById('optAutomatic'),
-            optManual: document.getElementById('optManual'),
-            optEasy: document.getElementById('optEasy'),
-            optNormal: document.getElementById('optNormal'),
-            optHard: document.getElementById('optHard'),
-            optExtreme: document.getElementById('optExtreme')
-        };
+            const DOM = {
+                score: document.getElementById('score'),
+                wave: document.getElementById('wave'),
+                bossHP: document.getElementById('bossHP'),
+                bossBar: document.getElementById('bossBar'),
+                bossHPValue: document.getElementById('bossHPValue'),
+                bossPips: document.getElementById('bossPips'),
+                combo: document.getElementById('combo'),
+                waveMsg: document.getElementById('waveMsg'),
+                startScreen: document.getElementById('startScreen'),
+                overScreen: document.getElementById('overScreen'),
+                endScore: document.getElementById('endScore'),
+                endWave: document.getElementById('endWave'),
+                victoryScreen: document.getElementById('victoryScreen'),
+                victoryScore: document.getElementById('victoryScore'),
+                victoryRestartBtn: document.getElementById('victoryRestartBtn'),
+                pauseScreen: document.getElementById('pauseScreen'),
+                bossTitle: document.querySelector('.boss-hp-title'),
+                pwrRapid: document.getElementById('pwrRapid'),
+                pwrSpread: document.getElementById('pwrSpread'),
+                pwrDamage: document.getElementById('pwrDamage'),
+                pwrMulti: document.getElementById('pwrMulti'),
+                pwrRocket: document.getElementById('pwrRocket'),
+                rapidLvl: document.getElementById('rapidLvl'),
+                spreadLvl: document.getElementById('spreadLvl'),
+                damageLvl: document.getElementById('damageLvl'),
+                multiLvl: document.getElementById('multiLvl'),
+                rocketLvl: document.getElementById('rocketLvl'),
+                continueBtn: document.getElementById('continueBtn'),
+                pauseHelpBtn: document.getElementById('pauseHelpBtn'),
+                // Shop elements
+                shopBtn: document.getElementById('shopBtn'),
+                shopScreen: document.getElementById('shopScreen'),
+                shopScore: document.getElementById('shopScore'),
+                shopRapidLvl: document.getElementById('shopRapidLvl'),
+                shopSpreadLvl: document.getElementById('shopSpreadLvl'),
+                shopDamageLvl: document.getElementById('shopDamageLvl'),
+                shopMultiLvl: document.getElementById('shopMultiLvl'),
+                shopRocketLvl: document.getElementById('shopRocketLvl'),
+                buyRapid: document.getElementById('buyRapid'),
+                buySpread: document.getElementById('buySpread'),
+                buyDamage: document.getElementById('buyDamage'),
+                buyMulti: document.getElementById('buyMulti'),
+                buyRocket: document.getElementById('buyRocket'),
+                // Options & Help screens
+                optionsScreen: document.getElementById('optionsScreen'),
+                helpScreen: document.getElementById('helpScreen'),
+                optionsBtn: document.getElementById('optionsBtn'),
+                helpBtn: document.getElementById('helpBtn'),
+                optionsBackBtn: document.getElementById('optionsBackBtn'),
+                helpBackBtn: document.getElementById('helpBackBtn'),
+                // Option buttons
+                optAutomatic: document.getElementById('optAutomatic'),
+                optManual: document.getElementById('optManual'),
+                optEasy: document.getElementById('optEasy'),
+                optNormal: document.getElementById('optNormal'),
+                optHard: document.getElementById('optHard'),
+                optExtreme: document.getElementById('optExtreme')
+            };
 
-        function resize() {
-            canvas.width = Math.min(window.innerWidth, 480);
-            canvas.height = window.innerHeight;
-        }
-        resize();
-        window.addEventListener('resize', resize);
-
-        // Object pools (increased for insane bullet counts)
-        const POOL = {
-            bullets: new Array(800).fill(null).map(() => ({ on: false, x: 0, y: 0, vx: 0, vy: 0, dmg: 1 })),
-            rockets: new Array(20).fill(null).map(() => ({ on: false, x: 0, y: 0, vy: 0 })),
-            explosions: new Array(20).fill(null).map(() => ({ on: false, x: 0, y: 0, r: 0, maxR: 0, life: 0 })),
-            particles: new Array(250).fill(null).map(() => ({ on: false, x: 0, y: 0, vx: 0, vy: 0, life: 0, r: 0, g: 0, b: 0, size: 0 })),
-            texts: new Array(50).fill(null).map(() => ({ on: false, x: 0, y: 0, txt: '', r: 0, g: 0, b: 0, life: 0 }))
-        };
-
-        // === NUMBER FORMATTING FOR INSANE VALUES ===
-        function formatNumber(n) {
-            if (n < 1000) return Math.floor(n).toString();
-            if (n < 1000000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
-            if (n < 1000000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
-            if (n < 1000000000000) return (n / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
-            return (n / 1000000000000).toFixed(1).replace(/\.0$/, '') + 'T';
-        }
-
-        // === GAME CONSTANTS ===
-        const MAX_WAVE = 200;
-        const SUPER_BOSS_WAVE = 200;
-
-        let running = false;
-        let paused = false;
-        let shopOpen = false;
-        let firing = false; // Only fire while holding left click
-        let score = 0;
-
-        // === SETTINGS SYSTEM ===
-        const SETTINGS_KEY = 'neonWingsSettings';
-        const DIFFICULTY_MULTIPLIERS = {
-            easy: 0.5,
-            normal: 1.0,
-            hard: 1.5,
-            extreme: 2.0
-        };
-
-        const gameSettings = {
-            fireMode: 'manual',  // 'automatic' or 'manual'
-            difficulty: 'hard'   // 'easy', 'normal', 'hard', 'extreme'
-        };
-
-        function loadSettings() {
-            try {
-                const saved = localStorage.getItem(SETTINGS_KEY);
-                if (saved) {
-                    const data = JSON.parse(saved);
-                    if (data.fireMode) gameSettings.fireMode = data.fireMode;
-                    if (data.difficulty) gameSettings.difficulty = data.difficulty;
-                }
-            } catch (e) {
-                console.error('Failed to load settings:', e);
+            function resize() {
+                canvas.width = Math.min(window.innerWidth, 480);
+                canvas.height = window.innerHeight;
             }
-            updateSettingsUI();
-        }
+            resize();
+            window.addEventListener('resize', resize);
 
-        function saveSettings() {
-            try {
-                localStorage.setItem(SETTINGS_KEY, JSON.stringify(gameSettings));
-            } catch (e) {
-                console.error('Failed to save settings:', e);
+            // Object pools (increased for insane bullet counts)
+            const POOL = {
+                bullets: new Array(800).fill(null).map(() => ({ on: false, x: 0, y: 0, vx: 0, vy: 0, dmg: 1 })),
+                rockets: new Array(20).fill(null).map(() => ({ on: false, x: 0, y: 0, vy: 0 })),
+                explosions: new Array(20).fill(null).map(() => ({ on: false, x: 0, y: 0, r: 0, maxR: 0, life: 0 })),
+                particles: new Array(250).fill(null).map(() => ({ on: false, x: 0, y: 0, vx: 0, vy: 0, life: 0, r: 0, g: 0, b: 0, size: 0 })),
+                texts: new Array(50).fill(null).map(() => ({ on: false, x: 0, y: 0, txt: '', r: 0, g: 0, b: 0, life: 0 }))
+            };
+
+            // === NUMBER FORMATTING FOR INSANE VALUES ===
+            function formatNumber(n) {
+                if (n < 1000) return Math.floor(n).toString();
+                if (n < 1000000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+                if (n < 1000000000) return (n / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+                if (n < 1000000000000) return (n / 1000000000).toFixed(1).replace(/\.0$/, '') + 'B';
+                return (n / 1000000000000).toFixed(1).replace(/\.0$/, '') + 'T';
             }
-        }
 
-        function updateSettingsUI() {
-            // Fire mode buttons
-            DOM.optAutomatic.classList.toggle('selected', gameSettings.fireMode === 'automatic');
-            DOM.optManual.classList.toggle('selected', gameSettings.fireMode === 'manual');
-            // Difficulty buttons
-            DOM.optEasy.classList.toggle('selected', gameSettings.difficulty === 'easy');
-            DOM.optNormal.classList.toggle('selected', gameSettings.difficulty === 'normal');
-            DOM.optHard.classList.toggle('selected', gameSettings.difficulty === 'hard');
-            DOM.optExtreme.classList.toggle('selected', gameSettings.difficulty === 'extreme');
-        }
+            // === GAME CONSTANTS ===
+            const MAX_WAVE = 30;
+            const SUPER_BOSS_WAVE = 30;
 
-        function setFireMode(mode) {
-            gameSettings.fireMode = mode;
-            saveSettings();
-            updateSettingsUI();
-        }
+            let running = false;
+            let paused = false;
+            let shopOpen = false;
+            let firing = false; // Only fire while holding left click
+            let score = 0;
 
-        function setDifficulty(diff) {
-            gameSettings.difficulty = diff;
-            saveSettings();
-            updateSettingsUI();
-        }
+            // === SETTINGS SYSTEM ===
+            const SETTINGS_KEY = 'neonWingsSettings';
+            const DIFFICULTY_MULTIPLIERS = {
+                easy: 0.5,
+                normal: 1.0,
+                hard: 1.5,
+                extreme: 2.0
+            };
 
-        function toggleOptionsScreen() {
-            const visible = !DOM.optionsScreen.classList.contains('hide');
-            if (visible) {
-                DOM.optionsScreen.classList.add('hide');
-            } else {
-                DOM.helpScreen.classList.add('hide');
-                DOM.optionsScreen.classList.remove('hide');
-            }
-        }
+            const gameSettings = {
+                fireMode: 'manual',  // 'automatic' or 'manual'
+                difficulty: 'hard'   // 'easy', 'normal', 'hard', 'extreme'
+            };
 
-        let helpOpenedFromPause = false;
-
-        function toggleHelpScreen(fromPause = false) {
-            const visible = !DOM.helpScreen.classList.contains('hide');
-            if (visible) {
-                DOM.helpScreen.classList.add('hide');
-                // Return to pause screen if opened from there
-                if (helpOpenedFromPause) {
-                    DOM.pauseScreen.classList.remove('hide');
-                    helpOpenedFromPause = false;
-                }
-            } else {
-                helpOpenedFromPause = fromPause;
-                DOM.optionsScreen.classList.add('hide');
-                if (fromPause) {
-                    DOM.pauseScreen.classList.add('hide');
-                }
-                DOM.helpScreen.classList.remove('hide');
-            }
-        }
-        let waveNum = 1;
-        let comboCount = 0;
-        let comboTime = 0;
-        let lastFrame = 0;
-        let lastUIUpdate = 0;
-
-        // Player with stackable power-ups
-        const P = {
-            x: 240, y: 0, spd: 7,
-            baseRate: 160, lastShot: 0,
-            rapid: 0,    // 0-4: fire rate multiplier
-            spread: 0,   // 0-4: bullet spread count
-            damage: 0,   // 0-4: damage multiplier
-            multi: 0,    // 0-4: parallel bullets
-            rockets: 0   // ammo count
-        };
-
-        let snake = { segs: [], spd: 0.3, dir: 1, moveT: 0, descT: 0, descInt: 3200, descPaused: 0 };
-        let pups = [];
-
-        // === BALANCED DIFFICULTY SCALING ===
-        // Enemy HP scales FASTER than player damage to create challenge
-        function getSegmentHP(wave, isHead) {
-            if (isHead) {
-                // SUPER BOSS at wave 200
-                const isSuperBoss = wave >= SUPER_BOSS_WAVE;
-                
-                // Boss: Aggressive exponential scaling (1.35x per wave)
-                const bars = isSuperBoss ? 50 : Math.min(2 + Math.floor(wave * 0.6), 20);
-                const basePerBar = 200;
-                const effectiveWave = Math.min(wave, 100); // Cap scaling at wave 100 for sanity
-                const scaleFactor = Math.pow(1.35, effectiveWave);
-                let perBar = Math.floor(basePerBar * scaleFactor);
-                
-                // Super boss: 100x HP multiplier
-                if (isSuperBoss) perBar = Math.floor(perBar * 100);
-                
-                return { hp: bars * perBar, bars, perBar, isSuperBoss };
-            } else {
-                // Tail segments: Also aggressive scaling (1.30x per wave)
-                // Wave 1: ~20, Wave 10: ~300, Wave 20: ~6K, Wave 50: ~6M
-                const base = 20;
-                const scaleFactor = Math.pow(1.30, wave); // 30% growth per wave
-                const hp = Math.floor(base * scaleFactor * (0.8 + Math.random() * 0.4));
-                return { hp, bars: 1, perBar: hp };
-            }
-        }
-
-        function getSnakeSpeed(wave) {
-            // Speed scaling CAPS at wave 50 for playability
-            // Wave 1: 0.3, Wave 10: 0.9, Wave 25: 2.5, Wave 50+: 4.0 max
-            const effectiveWave = Math.min(wave, 50); // Cap at wave 50
-            const base = 0.3;
-            const scaleFactor = Math.pow(1.08, effectiveWave); // 8% faster per wave (was 12%)
-            return Math.min(base * scaleFactor, 4.0); // Cap at 4.0 (was 10)
-        }
-
-        function getDescendInterval(wave) {
-            // Faster descent, but floor at 800ms for human reaction
-            // Wave 1: 3500ms, Wave 10: 2200ms, Wave 30+: 800ms
-            const effectiveWave = Math.min(wave, 50);
-            return Math.max(800, 3500 - effectiveWave * 80 - Math.pow(effectiveWave, 1.2) * 3);
-        }
-
-        function getDescendAmount(wave) {
-            // How far the snake drops each descent
-            // Wave 1: 20px, Wave 10: 35px, Wave 20: 50px, Wave 50: 80px
-            return Math.min(20 + wave * 1.5 + Math.floor(wave / 10) * 5, 100);
-        }
-
-        function getSegmentCount(wave) {
-            return 8 + wave * 3 + Math.floor(wave / 3) * 2;
-        }
-
-        // === HELPERS ===
-        function getBullet() {
-            for (let b of POOL.bullets) if (!b.on) return b;
-            return null;
-        }
-
-        function getRocket() {
-            for (let r of POOL.rockets) if (!r.on) return r;
-            return null;
-        }
-
-        function getExplosion() {
-            for (let e of POOL.explosions) if (!e.on) return e;
-            return null;
-        }
-
-        function spawnParticle(x, y, r, g, b, count) {
-            for (let i = 0; i < count; i++) {
-                for (let p of POOL.particles) {
-                    if (!p.on) {
-                        p.on = true;
-                        p.x = x; p.y = y;
-                        p.vx = (Math.random() - 0.5) * 6;
-                        p.vy = (Math.random() - 0.5) * 6;
-                        p.life = 1;
-                        p.r = r; p.g = g; p.b = b;
-                        p.size = Math.random() * 3 + 1;
-                        break;
+            function loadSettings() {
+                try {
+                    const saved = localStorage.getItem(SETTINGS_KEY);
+                    if (saved) {
+                        const data = JSON.parse(saved);
+                        if (data.fireMode) gameSettings.fireMode = data.fireMode;
+                        if (data.difficulty) gameSettings.difficulty = data.difficulty;
                     }
+                } catch (e) {
+                    console.error('Failed to load settings:', e);
                 }
+                updateSettingsUI();
             }
-        }
 
-        function spawnText(x, y, txt, r, g, b) {
-            for (let t of POOL.texts) {
-                if (!t.on) {
-                    t.on = true;
-                    t.x = x; t.y = y;
-                    t.txt = txt;
-                    t.r = r; t.g = g; t.b = b;
-                    t.life = 1;
-                    break;
-                }
-            }
-        }
-
-        // === SNAKE INIT ===
-        function initSnake() {
-            snake.segs = [];
-            const size = 26;
-            const gap = size * 1.5;
-            let x = canvas.width * 0.75;
-            let y = 90;
-            let dir = -1;
-            const count = getSegmentCount(waveNum);
-
-            for (let i = 0; i < count; i++) {
-                const isHead = i === count - 1;
-                const stats = getSegmentHP(waveNum, isHead);
-                
-                // Power-up drop chance DECREASES with wave for challenge
-                // Wave 1-5: 30%, Wave 6-15: 20%, Wave 16-30: 12%, Wave 31+: 8%
-                let pupChance;
-                if (waveNum <= 5) pupChance = 0.30;
-                else if (waveNum <= 15) pupChance = 0.20;
-                else if (waveNum <= 30) pupChance = 0.12;
-                else pupChance = 0.08;
-                
-                snake.segs.push({
-                    x, y, tx: x, ty: y,
-                    size: isHead ? size * 1.3 : size,
-                    hp: stats.hp,
-                    maxHP: stats.hp,
-                    bars: stats.bars,
-                    perBar: stats.perBar,
-                    head: isHead,
-                    pup: !isHead && Math.random() < pupChance,
-                    pupType: ['rapid', 'spread', 'damage', 'multi', 'rocket'][Math.floor(Math.random() * 5)],
-                    flash: 0
-                });
-
-                x += dir * gap;
-                if (x < 50 || x > canvas.width - 50) {
-                    dir *= -1;
-                    x += dir * gap;
-                    y += gap * 0.7;
+            function saveSettings() {
+                try {
+                    localStorage.setItem(SETTINGS_KEY, JSON.stringify(gameSettings));
+                } catch (e) {
+                    console.error('Failed to save settings:', e);
                 }
             }
 
-            snake.segs.reverse();
-            snake.spd = getSnakeSpeed(waveNum);
-            snake.descInt = getDescendInterval(waveNum);
-            snake.descPaused = 0;
-            
-            // Update boss title for super boss
-            const head = snake.segs.find(s => s.head);
-            if (head && head.isSuperBoss) {
-                DOM.bossTitle.textContent = '☠️ OMEGA SERPENT ☠️';
-                DOM.bossTitle.classList.add('super-boss-title');
-            } else {
-                DOM.bossTitle.textContent = 'SERPENT BOSS';
-                DOM.bossTitle.classList.remove('super-boss-title');
-            }
-            
-            updateBossUI();
-        }
-
-        // === SHOOTING (INSANE SCALING - MAX LEVEL 50) ===
-        const MAX_POWER_LEVEL = 50;
-        const MAX_ROCKETS = 99;
-
-        function getFireRate() {
-            // Fire rate: 160ms -> 25ms (capped to prevent machine gun spam)
-            // Smooth curve with reasonable minimum
-            const level = Math.min(P.rapid, MAX_POWER_LEVEL);
-            const minRate = 25; // Minimum 25ms between shots (was 5ms)
-            const maxRate = 160;
-            // Exponential decay from 160 to 25
-            return Math.max(minRate, Math.floor(maxRate * Math.pow(0.95, level)));
-        }
-
-        function getDamage() {
-            // BALANCED damage scaling - slower than enemy HP growth
-            // Level 0: 1, Level 10: ~12, Level 20: ~140, Level 30: ~1600, Level 50: ~200K
-            const level = Math.min(P.damage, MAX_POWER_LEVEL);
-            if (level === 0) return 1;
-            // Exponential: 1.28^level - much slower than before
-            return Math.floor(Math.pow(1.28, level));
-        }
-
-        function getSpreadCount() {
-            // Spread: 1 -> 25 bullets max (capped for balance)
-            const level = Math.min(P.spread, MAX_POWER_LEVEL);
-            return Math.min(1 + level, 25); // Cap at 25 bullets
-        }
-
-        function getMultiCount() {
-            // Multi: 1 -> 20 parallel streams max (capped for balance)
-            const level = Math.min(P.multi, MAX_POWER_LEVEL);
-            return Math.min(1 + level, 20); // Cap at 20 streams
-        }
-
-        function shoot(now) {
-            const rate = getFireRate();
-            if (now - P.lastShot < rate) return;
-            P.lastShot = now;
-
-            const dmg = getDamage();
-            const spreadCount = getSpreadCount();
-            const multiCount = getMultiCount();
-            const bulletSpeed = -11 - Math.min(P.rapid, 20) * 0.3; // Cap speed boost
-
-            if (spreadCount > 1 && multiCount > 1) {
-                // Spread + Multi combo - capped for balance
-                const total = Math.min(spreadCount + multiCount, 35); // Cap at 35 bullets (was 80)
-                const arc = Math.min(60 + P.spread * 1.2, 120); // Tighter arc
-                for (let i = 0; i < total; i++) {
-                    const b = getBullet();
-                    if (!b) break;
-                    const ang = total > 1 ? (-arc/2 + (arc / (total - 1)) * i) * Math.PI / 180 : 0;
-                    b.on = true;
-                    b.x = P.x; b.y = P.y - 18;
-                    b.vx = Math.sin(ang) * (3 + Math.min(P.spread, 20) * 0.2);
-                    b.vy = bulletSpeed;
-                    b.dmg = dmg;
-                }
-            } else if (spreadCount > 1) {
-                // Spread only
-                const arc = Math.min(25 + P.spread * 2.5, 140);
-                for (let i = 0; i < spreadCount; i++) {
-                    const b = getBullet();
-                    if (!b) break;
-                    const ang = spreadCount > 1 ? (-arc/2 + (arc / (spreadCount - 1)) * i) * Math.PI / 180 : 0;
-                    b.on = true;
-                    b.x = P.x; b.y = P.y - 18;
-                    b.vx = Math.sin(ang) * 2.5;
-                    b.vy = bulletSpeed;
-                    b.dmg = dmg;
-                }
-            } else if (multiCount > 1) {
-                // Multi only - parallel streams
-                const spacing = Math.max(3, 8 - multiCount * 0.1); // Tighter spacing at high levels
-                const w = (multiCount - 1) * spacing;
-                for (let i = 0; i < multiCount; i++) {
-                    const b = getBullet();
-                    if (!b) break;
-                    const ox = -w/2 + i * spacing;
-                    b.on = true;
-                    b.x = P.x + ox; b.y = P.y - 18;
-                    b.vx = (ox / (w || 1)) * 0.5; // Slight spread
-                    b.vy = bulletSpeed;
-                    b.dmg = dmg;
-                }
-            } else {
-                // Single
-                const b = getBullet();
-                if (b) {
-                    b.on = true;
-                    b.x = P.x; b.y = P.y - 18;
-                    b.vx = 0; b.vy = bulletSpeed;
-                    b.dmg = dmg;
-                }
-            }
-        }
-
-        // === ROCKETS ===
-        function fireRocket() {
-            if (P.rockets <= 0) return;
-            const r = getRocket();
-            if (!r) return;
-            
-            P.rockets--;
-            updatePowerUpUI();
-            
-            r.on = true;
-            r.x = P.x;
-            r.y = P.y - 25;
-            r.vy = -8;
-            
-            spawnParticle(P.x, P.y, 255, 100, 50, 5);
-        }
-
-        function createExplosion(x, y) {
-            const e = getExplosion();
-            if (e) {
-                e.on = true;
-                e.x = x;
-                e.y = y;
-                e.r = 0;
-                e.maxR = Math.min(60 + waveNum * 1.5, 100); // Cap radius at 100px
-                e.life = 1;
-            }
-            
-            // Visual particles
-            spawnParticle(x, y, 255, 100, 0, 15);
-            spawnParticle(x, y, 255, 200, 50, 10);
-            
-            // AoE damage: 10x bullet damage (nerfed from 30x)
-            const baseDmg = getDamage();
-            const aoeDmg = Math.floor(baseDmg * 10 * (1 + waveNum * 0.05)); // 10x bullet damage + small wave bonus
-            const radius = Math.min(60 + waveNum * 1.5, 100);
-            
-            for (let i = snake.segs.length - 1; i >= 0; i--) {
-                const s = snake.segs[i];
-                if (s.hp <= 0) continue;
-                
-                const dx = s.x - x;
-                const dy = s.y - y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                
-                if (dist < radius + s.size) {
-                    // Damage falls off with distance
-                    const falloff = 1 - (dist / (radius + s.size)) * 0.5;
-                    const dmg = Math.floor(aoeDmg * falloff);
-                    
-                    s.hp -= dmg;
-                    s.flash = 1;
-                    
-                    comboCount++;
-                    comboTime = 60;
-                    
-                    const pts = Math.floor(dmg * (1 + comboCount * 0.05));
-                    score += pts;
-                    spawnText(s.x, s.y - 15, '+' + formatNumber(pts), 255, 150, 50);
-                    
-                    if (s.hp <= 0) {
-                        handleSegmentDeath(s, i);
-                    }
-                }
-            }
-            
-            updateBossUI();
-        }
-
-        function handleSegmentDeath(s, index) {
-            spawnParticle(s.x, s.y, s.head ? 255 : 200, s.head ? 0 : 200, s.head ? 128 : 200, 8);
-            // Kill bonus scales exponentially with wave
-            const killBonus = s.head 
-                ? Math.floor(200 * Math.pow(1.15, waveNum)) 
-                : Math.floor(50 * Math.pow(1.12, waveNum));
-            score += killBonus;
-
-            if (s.pup && pups.length < 10) {
-                pups.push({ x: s.x, y: s.y, type: s.pupType, vy: 1.8 });
+            function updateSettingsUI() {
+                // Fire mode buttons
+                DOM.optAutomatic.classList.toggle('selected', gameSettings.fireMode === 'automatic');
+                DOM.optManual.classList.toggle('selected', gameSettings.fireMode === 'manual');
+                // Difficulty buttons
+                DOM.optEasy.classList.toggle('selected', gameSettings.difficulty === 'easy');
+                DOM.optNormal.classList.toggle('selected', gameSettings.difficulty === 'normal');
+                DOM.optHard.classList.toggle('selected', gameSettings.difficulty === 'hard');
+                DOM.optExtreme.classList.toggle('selected', gameSettings.difficulty === 'extreme');
             }
 
-            if (s.head) {
-                // Kill entire snake - but DON'T spawn powerups (wave cleanup)
-                for (let seg of snake.segs) {
-                    if (seg !== s && seg.hp > 0) {
-                        spawnParticle(seg.x, seg.y, 255, 100, 50, 4);
-                        score += Math.floor(30 * Math.pow(1.1, waveNum));
-                        // No powerups spawned on wave end
-                    }
-                }
-                
-                // Clear all floating powerups (wave cleanup)
-                pups = [];
-                
-                // Clear bullets and visual clutter
-                for (let b of POOL.bullets) b.on = false;
-                for (let r of POOL.rockets) r.on = false;
-                
-                const isSuperBoss = s.isSuperBoss || waveNum >= SUPER_BOSS_WAVE;
-                
-                if (isSuperBoss) {
-                    // VICTORY!
-                    spawnText(s.x, s.y - 35, '🌟 VICTORY! 🌟', 255, 215, 0);
-                    score += Math.floor(500000 * Math.pow(1.2, waveNum)); // Massive victory bonus
-                    snake.segs = [];
-                    
-                    setTimeout(() => {
-                        running = false;
-                        clearSave();
-                        DOM.victoryScore.textContent = formatNumber(score);
-                        DOM.victoryScreen.classList.remove('hide');
-                    }, 1500);
-                    return;
-                }
-                
-                spawnText(s.x, s.y - 35, 'DEFEATED!', 255, 0, 128);
-                // Wave clear bonus scales exponentially
-                score += Math.floor(500 * Math.pow(1.2, waveNum));
-                snake.segs = [];
+            function setFireMode(mode) {
+                gameSettings.fireMode = mode;
+                saveSettings();
+                updateSettingsUI();
+            }
 
-                paused = true;
-                waveNum++;
-                saveGame(); // Save after each wave
-                showWave();
-                setTimeout(() => { initSnake(); paused = false; }, 1800);
-            } else {
-                // STRATEGIC DISTANCE-BASED PUSHBACK
-                // Segments far from head give MUCH more pushback
-                const distanceFromHead = index; // 0 = head, higher = further back
-                const totalSegs = snake.segs.length;
-                
-                // Base pushback + distance bonus
-                // Close to head (index 1-3): 20-30px
-                // Middle (index 4-8): 40-60px
-                // Far back (index 9+): 80-120px+
-                const basePushback = 20;
-                const distanceBonus = Math.pow(distanceFromHead, 1.5) * 8;
-                const wavePushback = Math.min(waveNum * 1.5, 30);
-                const totalPushback = Math.min(basePushback + distanceBonus + wavePushback, 150);
-                
-                snake.segs.splice(index, 1);
-                
-                for (let seg of snake.segs) {
-                    seg.ty -= totalPushback;
-                    seg.ty = Math.max(seg.ty, 60); // Don't go above screen
-                }
-                
-                // Distant kills pause descent for 3 seconds
-                if (distanceFromHead >= 5) {
-                    snake.descPaused = 3000; // 3 second pause
-                    spawnText(s.x, s.y, 'MEGA PUSHBACK!', 255, 100, 255);
-                } else if (distanceFromHead >= 3) {
-                    snake.descPaused = 1500; // 1.5 second pause
-                    spawnText(s.x, s.y, 'BIG PUSHBACK!', 255, 150, 100);
+            function setDifficulty(diff) {
+                gameSettings.difficulty = diff;
+                saveSettings();
+                updateSettingsUI();
+            }
+
+            function toggleOptionsScreen() {
+                const visible = !DOM.optionsScreen.classList.contains('hide');
+                if (visible) {
+                    DOM.optionsScreen.classList.add('hide');
                 } else {
-                    spawnText(s.x, s.y, 'PUSHBACK', 255, 200, 100);
-                }
-            }
-        }
-
-        // === UPDATE ===
-        function update(dt, now) {
-            if (!running || paused) return;
-
-            // Shoot based on fire mode setting
-            if (gameSettings.fireMode === 'automatic' || firing) shoot(now);
-
-            // Bullets
-            for (let b of POOL.bullets) {
-                if (!b.on) continue;
-                b.x += b.vx;
-                b.y += b.vy;
-                if (b.y < -15 || b.x < -15 || b.x > canvas.width + 15) {
-                    b.on = false;
-                    comboCount = 0;
+                    DOM.helpScreen.classList.add('hide');
+                    DOM.optionsScreen.classList.remove('hide');
                 }
             }
 
-            // Rockets
-            for (let r of POOL.rockets) {
-                if (!r.on) continue;
-                r.y += r.vy;
-                
-                // Check collision with segments
-                let hit = false;
-                for (let s of snake.segs) {
-                    if (s.hp <= 0) continue;
-                    const dx = r.x - s.x;
-                    const dy = r.y - s.y;
-                    if (dx * dx + dy * dy < s.size * s.size) {
-                        createExplosion(r.x, r.y);
-                        r.on = false;
-                        hit = true;
-                        break;
+            let helpOpenedFromPause = false;
+
+            function toggleHelpScreen(fromPause = false) {
+                const visible = !DOM.helpScreen.classList.contains('hide');
+                if (visible) {
+                    DOM.helpScreen.classList.add('hide');
+                    // Return to pause screen if opened from there
+                    if (helpOpenedFromPause) {
+                        DOM.pauseScreen.classList.remove('hide');
+                        helpOpenedFromPause = false;
                     }
-                }
-                
-                // Off screen - explode anyway
-                if (!hit && r.y < -20) {
-                    createExplosion(r.x, 30);
-                    r.on = false;
-                }
-            }
-
-            // Explosions (visual only, damage already applied)
-            for (let e of POOL.explosions) {
-                if (!e.on) continue;
-                e.r += (e.maxR - e.r) * 0.2;
-                e.life -= 0.06;
-                if (e.life <= 0) e.on = false;
-            }
-
-            // Snake movement
-            if (snake.segs.length > 0) {
-                snake.moveT += dt;
-                snake.descT += dt;
-
-                if (snake.moveT > 50) {
-                    snake.moveT = 0;
-                    const head = snake.segs[0];
-                    if (head) {
-                        head.tx += snake.dir * snake.spd * 30;
-                        if (head.tx < 45 || head.tx > canvas.width - 45) snake.dir *= -1;
+                } else {
+                    helpOpenedFromPause = fromPause;
+                    DOM.optionsScreen.classList.add('hide');
+                    if (fromPause) {
+                        DOM.pauseScreen.classList.add('hide');
                     }
+                    DOM.helpScreen.classList.remove('hide');
+                }
+            }
+            let waveNum = 1;
+            let comboCount = 0;
+            let comboTime = 0;
+            let lastFrame = 0;
+            let lastUIUpdate = 0;
 
-                    for (let i = 1; i < snake.segs.length; i++) {
-                        const s = snake.segs[i];
-                        const p = snake.segs[i - 1];
-                        if (!s || !p) continue;
-                        const dx = p.x - s.tx;
-                        const dy = p.y - s.ty;
-                        const d = Math.sqrt(dx * dx + dy * dy);
-                        const target = s.size * 1.4;
-                        if (d > target) {
-                            const ratio = (d - target) / d;
-                            s.tx += dx * ratio;
-                            s.ty += dy * ratio;
+            // Player with stackable power-ups
+            const P = {
+                x: 240, y: 0, spd: 7,
+                baseRate: 160, lastShot: 0,
+                rapid: 0,    // 0-4: fire rate multiplier
+                spread: 0,   // 0-4: bullet spread count
+                damage: 0,   // 0-4: damage multiplier
+                multi: 0,    // 0-4: parallel bullets
+                rockets: 0   // ammo count
+            };
+
+            let snake = { segs: [], spd: 0.3, dir: 1, moveT: 0, descT: 0, descInt: 3200, descPaused: 0 };
+            let pups = [];
+
+            // === BALANCED DIFFICULTY SCALING ===
+            // Enemy HP scales FASTER than player damage to create challenge
+            function getSegmentHP(wave, isHead) {
+                if (isHead) {
+                    // SUPER BOSS at wave 200
+                    const isSuperBoss = wave >= SUPER_BOSS_WAVE;
+
+                    // Boss: Aggressive exponential scaling (1.35x per wave)
+                    const bars = isSuperBoss ? 50 : Math.min(2 + Math.floor(wave * 0.6), 20);
+                    const basePerBar = 200;
+                    const effectiveWave = Math.min(wave, 100); // Cap scaling at wave 100 for sanity
+                    const scaleFactor = Math.pow(1.25, effectiveWave);
+                    let perBar = Math.floor(basePerBar * scaleFactor);
+
+                    // Super boss: 100x HP multiplier
+                    if (isSuperBoss) perBar = Math.floor(perBar * 100);
+
+                    return { hp: bars * perBar, bars, perBar, isSuperBoss };
+                } else {
+                    // Tail segments: Also aggressive scaling (1.30x per wave)
+                    // Wave 1: ~20, Wave 10: ~300, Wave 20: ~6K, Wave 50: ~6M
+                    const base = 20;
+                    const scaleFactor = Math.pow(1.30, wave); // 30% growth per wave
+                    const hp = Math.floor(base * scaleFactor * (0.8 + Math.random() * 0.4));
+                    return { hp, bars: 1, perBar: hp };
+                }
+            }
+
+            function getSnakeSpeed(wave) {
+                // Speed scaling CAPS at wave 50 for playability
+                // Wave 1: 0.3, Wave 10: 0.9, Wave 25: 2.5, Wave 50+: 4.0 max
+                const effectiveWave = Math.min(wave, 50); // Cap at wave 50
+                const base = 0.3;
+                const scaleFactor = Math.pow(1.12, effectiveWave); // 12% faster per wave
+                return Math.min(base * scaleFactor, 4.0); // Cap at 4.0 (was 10)
+            }
+
+            function getDescendInterval(wave) {
+                // Faster descent, but floor at 800ms for human reaction
+                // Wave 1: 3500ms, Wave 10: 2200ms, Wave 30+: 800ms
+                const effectiveWave = Math.min(wave, 50);
+                return Math.max(800, 3500 - effectiveWave * 100 - Math.pow(effectiveWave, 1.2) * 3);
+            }
+
+            function getDescendAmount(wave) {
+                // How far the snake drops each descent
+                // Wave 1: 20px, Wave 10: 35px, Wave 20: 50px, Wave 50: 80px
+                return Math.min(20 + wave * 1.5 + Math.floor(wave / 10) * 5, 100);
+            }
+
+            function getSegmentCount(wave) {
+                return 8 + wave * 3 + Math.floor(wave / 3) * 2;
+            }
+
+            // === HELPERS ===
+            function getBullet() {
+                for (let b of POOL.bullets) if (!b.on) return b;
+                return null;
+            }
+
+            function getRocket() {
+                for (let r of POOL.rockets) if (!r.on) return r;
+                return null;
+            }
+
+            function getExplosion() {
+                for (let e of POOL.explosions) if (!e.on) return e;
+                return null;
+            }
+
+            function spawnParticle(x, y, r, g, b, count) {
+                for (let i = 0; i < count; i++) {
+                    for (let p of POOL.particles) {
+                        if (!p.on) {
+                            p.on = true;
+                            p.x = x; p.y = y;
+                            p.vx = (Math.random() - 0.5) * 6;
+                            p.vy = (Math.random() - 0.5) * 6;
+                            p.life = 1;
+                            p.r = r; p.g = g; p.b = b;
+                            p.size = Math.random() * 3 + 1;
+                            break;
                         }
                     }
                 }
+            }
 
-                // Handle descent pause from strategic tail kills
-                if (snake.descPaused > 0) {
-                    snake.descPaused -= dt;
-                } else if (snake.descT > snake.descInt) {
-                    snake.descT = 0;
-                    const descAmount = getDescendAmount(waveNum);
-                    for (let s of snake.segs) s.ty += descAmount;
-                }
-
-                for (let s of snake.segs) {
-                    s.x += (s.tx - s.x) * 0.12;
-                    s.y += (s.ty - s.y) * 0.12;
-                    if (s.flash > 0) s.flash -= dt * 0.004;
+            function spawnText(x, y, txt, r, g, b) {
+                for (let t of POOL.texts) {
+                    if (!t.on) {
+                        t.on = true;
+                        t.x = x; t.y = y;
+                        t.txt = txt;
+                        t.r = r; t.g = g; t.b = b;
+                        t.life = 1;
+                        break;
+                    }
                 }
             }
 
-            // Bullet collision
-            for (let b of POOL.bullets) {
-                if (!b.on) continue;
-                for (let i = 0; i < snake.segs.length; i++) {
+            // === SNAKE INIT ===
+            function initSnake() {
+                snake.segs = [];
+                const size = 26;
+                const gap = size * 1.5;
+                let x = canvas.width * 0.75;
+                let y = 90;
+                let dir = -1;
+                const count = getSegmentCount(waveNum);
+
+                for (let i = 0; i < count; i++) {
+                    const isHead = i === count - 1;
+                    const stats = getSegmentHP(waveNum, isHead);
+
+                    // Power-up drop chance DECREASES with wave for challenge
+                    // Wave 1-5: 30%, Wave 6-15: 20%, Wave 16-30: 12%, Wave 31+: 8%
+                    let pupChance;
+                    if (waveNum <= 5) pupChance = 0.30;
+                    else if (waveNum <= 15) pupChance = 0.20;
+                    else if (waveNum <= 30) pupChance = 0.12;
+                    else pupChance = 0.08;
+
+                    snake.segs.push({
+                        x, y, tx: x, ty: y,
+                        size: isHead ? size * 1.3 : size,
+                        hp: stats.hp,
+                        maxHP: stats.hp,
+                        bars: stats.bars,
+                        perBar: stats.perBar,
+                        head: isHead,
+                        pup: !isHead && Math.random() < pupChance,
+                        pupType: ['rapid', 'spread', 'damage', 'multi', 'rocket'][Math.floor(Math.random() * 5)],
+                        flash: 0
+                    });
+
+                    x += dir * gap;
+                    if (x < 50 || x > canvas.width - 50) {
+                        dir *= -1;
+                        x += dir * gap;
+                        y += gap * 0.7;
+                    }
+                }
+
+                snake.segs.reverse();
+                snake.spd = getSnakeSpeed(waveNum);
+                snake.descInt = getDescendInterval(waveNum);
+                snake.descPaused = 0;
+
+                // Update boss title for super boss
+                const head = snake.segs.find(s => s.head);
+                if (head && head.isSuperBoss) {
+                    DOM.bossTitle.textContent = '☠️ OMEGA SERPENT ☠️';
+                    DOM.bossTitle.classList.add('super-boss-title');
+                } else {
+                    DOM.bossTitle.textContent = 'SERPENT BOSS';
+                    DOM.bossTitle.classList.remove('super-boss-title');
+                }
+
+                updateBossUI();
+            }
+
+            // === SHOOTING (INSANE SCALING - MAX LEVEL 50) ===
+            const MAX_POWER_LEVEL = 50;
+            const MAX_ROCKETS = 99;
+
+            function getFireRate() {
+                // Fire rate: 160ms -> 25ms (capped to prevent machine gun spam)
+                // Smooth curve with reasonable minimum
+                const level = Math.min(P.rapid, MAX_POWER_LEVEL);
+                const minRate = 25; // Minimum 25ms between shots (was 5ms)
+                const maxRate = 160;
+                // Exponential decay from 160 to 25
+                return Math.max(minRate, Math.floor(maxRate * Math.pow(0.95, level)));
+            }
+
+            function getDamage() {
+                // BALANCED damage scaling - slower than enemy HP growth
+                // Level 0: 1, Level 10: ~12, Level 20: ~140, Level 30: ~1600, Level 50: ~200K
+                const level = Math.min(P.damage, MAX_POWER_LEVEL);
+                if (level === 0) return 1;
+                // Exponential: 1.28^level - much slower than before
+                return Math.floor(Math.pow(1.28, level));
+            }
+
+            function getSpreadCount() {
+                // Spread: 1 -> 25 bullets max (capped for balance)
+                const level = Math.min(P.spread, MAX_POWER_LEVEL);
+                return Math.min(1 + level, 25); // Cap at 25 bullets
+            }
+
+            function getMultiCount() {
+                // Multi: 1 -> 20 parallel streams max (capped for balance)
+                const level = Math.min(P.multi, MAX_POWER_LEVEL);
+                return Math.min(1 + level, 20); // Cap at 20 streams
+            }
+
+            function shoot(now) {
+                const rate = getFireRate();
+                if (now - P.lastShot < rate) return;
+                P.lastShot = now;
+
+                const dmg = getDamage();
+                const spreadCount = getSpreadCount();
+                const multiCount = getMultiCount();
+                const bulletSpeed = -11 - Math.min(P.rapid, 20) * 0.3; // Cap speed boost
+
+                if (spreadCount > 1 && multiCount > 1) {
+                    // Spread + Multi combo - capped for balance
+                    const total = Math.min(spreadCount + multiCount, 35); // Cap at 35 bullets (was 80)
+                    const arc = Math.min(60 + P.spread * 1.2, 120); // Tighter arc
+                    for (let i = 0; i < total; i++) {
+                        const b = getBullet();
+                        if (!b) break;
+                        const ang = total > 1 ? (-arc / 2 + (arc / (total - 1)) * i) * Math.PI / 180 : 0;
+                        b.on = true;
+                        b.x = P.x; b.y = P.y - 18;
+                        b.vx = Math.sin(ang) * (3 + Math.min(P.spread, 20) * 0.2);
+                        b.vy = bulletSpeed;
+                        b.dmg = dmg;
+                    }
+                } else if (spreadCount > 1) {
+                    // Spread only
+                    const arc = Math.min(25 + P.spread * 2.5, 140);
+                    for (let i = 0; i < spreadCount; i++) {
+                        const b = getBullet();
+                        if (!b) break;
+                        const ang = spreadCount > 1 ? (-arc / 2 + (arc / (spreadCount - 1)) * i) * Math.PI / 180 : 0;
+                        b.on = true;
+                        b.x = P.x; b.y = P.y - 18;
+                        b.vx = Math.sin(ang) * 2.5;
+                        b.vy = bulletSpeed;
+                        b.dmg = dmg;
+                    }
+                } else if (multiCount > 1) {
+                    // Multi only - parallel streams
+                    const spacing = Math.max(3, 8 - multiCount * 0.1); // Tighter spacing at high levels
+                    const w = (multiCount - 1) * spacing;
+                    for (let i = 0; i < multiCount; i++) {
+                        const b = getBullet();
+                        if (!b) break;
+                        const ox = -w / 2 + i * spacing;
+                        b.on = true;
+                        b.x = P.x + ox; b.y = P.y - 18;
+                        b.vx = (ox / (w || 1)) * 0.5; // Slight spread
+                        b.vy = bulletSpeed;
+                        b.dmg = dmg;
+                    }
+                } else {
+                    // Single
+                    const b = getBullet();
+                    if (b) {
+                        b.on = true;
+                        b.x = P.x; b.y = P.y - 18;
+                        b.vx = 0; b.vy = bulletSpeed;
+                        b.dmg = dmg;
+                    }
+                }
+            }
+
+            // === ROCKETS ===
+            function fireRocket() {
+                if (P.rockets <= 0) return;
+                const r = getRocket();
+                if (!r) return;
+
+                P.rockets--;
+                updatePowerUpUI();
+
+                r.on = true;
+                r.x = P.x;
+                r.y = P.y - 25;
+                r.vy = -8;
+
+                spawnParticle(P.x, P.y, 255, 100, 50, 5);
+            }
+
+            function createExplosion(x, y) {
+                const e = getExplosion();
+                if (e) {
+                    e.on = true;
+                    e.x = x;
+                    e.y = y;
+                    e.r = 0;
+                    e.maxR = Math.min(60 + waveNum * 1.5, 100); // Cap radius at 100px
+                    e.life = 1;
+                }
+
+                // Visual particles
+                spawnParticle(x, y, 255, 100, 0, 15);
+                spawnParticle(x, y, 255, 200, 50, 10);
+
+                // AoE damage: 10x bullet damage (nerfed from 30x)
+                const baseDmg = getDamage();
+                const aoeDmg = Math.floor(baseDmg * 10 * (1 + waveNum * 0.05)); // 10x bullet damage + small wave bonus
+                const radius = Math.min(60 + waveNum * 1.5, 100);
+
+                for (let i = snake.segs.length - 1; i >= 0; i--) {
                     const s = snake.segs[i];
                     if (s.hp <= 0) continue;
-                    const dx = b.x - s.x;
-                    const dy = b.y - s.y;
-                    if (dx * dx + dy * dy < s.size * s.size) {
-                        s.hp -= b.dmg;
+
+                    const dx = s.x - x;
+                    const dy = s.y - y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < radius + s.size) {
+                        // Damage falls off with distance
+                        const falloff = 1 - (dist / (radius + s.size)) * 0.5;
+                        const dmg = Math.floor(aoeDmg * falloff);
+
+                        s.hp -= dmg;
                         s.flash = 1;
-                        b.on = false;
 
                         comboCount++;
-                        comboTime = 50;
+                        comboTime = 60;
 
-                        spawnParticle(b.x, b.y, 0, 255, 136, 2);
-
-                        // Score scales with damage dealt for big satisfying numbers
-                        const pts = Math.floor(b.dmg * (1 + comboCount * 0.05));
+                        const pts = Math.floor(dmg * (1 + comboCount * 0.05));
                         score += pts;
-                        spawnText(s.x, s.y - 18, '+' + formatNumber(pts), 0, 255, 255);
+                        spawnText(s.x, s.y - 15, '+' + formatNumber(pts), 255, 150, 50);
 
                         if (s.hp <= 0) {
                             handleSegmentDeath(s, i);
                         }
-                        updateBossUI();
-                        break;
+                    }
+                }
+
+                updateBossUI();
+            }
+
+            function handleSegmentDeath(s, index) {
+                spawnParticle(s.x, s.y, s.head ? 255 : 200, s.head ? 0 : 200, s.head ? 128 : 200, 8);
+                // Kill bonus scales exponentially with wave
+                const killBonus = s.head
+                    ? Math.floor(200 * Math.pow(1.15, waveNum))
+                    : Math.floor(50 * Math.pow(1.12, waveNum));
+                score += killBonus;
+
+                if (s.pup && pups.length < 10) {
+                    pups.push({ x: s.x, y: s.y, type: s.pupType, vy: 1.8 });
+                }
+
+                if (s.head) {
+                    // Kill entire snake - but DON'T spawn powerups (wave cleanup)
+                    for (let seg of snake.segs) {
+                        if (seg !== s && seg.hp > 0) {
+                            spawnParticle(seg.x, seg.y, 255, 100, 50, 4);
+                            score += Math.floor(30 * Math.pow(1.1, waveNum));
+                            // No powerups spawned on wave end
+                        }
+                    }
+
+                    // Clear all floating powerups (wave cleanup)
+                    pups = [];
+
+                    // Clear bullets and visual clutter
+                    for (let b of POOL.bullets) b.on = false;
+                    for (let r of POOL.rockets) r.on = false;
+
+                    const isSuperBoss = s.isSuperBoss || waveNum >= SUPER_BOSS_WAVE;
+
+                    if (isSuperBoss) {
+                        // VICTORY!
+                        spawnText(s.x, s.y - 35, '🌟 VICTORY! 🌟', 255, 215, 0);
+                        score += Math.floor(500000 * Math.pow(1.2, waveNum)); // Massive victory bonus
+                        snake.segs = [];
+
+                        setTimeout(() => {
+                            running = false;
+                            clearSave();
+                            DOM.victoryScore.textContent = formatNumber(score);
+                            DOM.victoryScreen.classList.remove('hide');
+                        }, 1500);
+                        return;
+                    }
+
+                    spawnText(s.x, s.y - 35, 'DEFEATED!', 255, 0, 128);
+                    // Wave clear bonus scales exponentially
+                    score += Math.floor(500 * Math.pow(1.2, waveNum));
+                    snake.segs = [];
+
+                    paused = true;
+                    waveNum++;
+                    saveGame(); // Save after each wave
+                    showWave();
+                    setTimeout(() => { initSnake(); paused = false; }, 1800);
+                } else {
+                    // STRATEGIC DISTANCE-BASED PUSHBACK
+                    // Segments far from head give MUCH more pushback
+                    const distanceFromHead = index; // 0 = head, higher = further back
+                    const totalSegs = snake.segs.length;
+
+                    // Base pushback + distance bonus
+                    // Close to head (index 1-3): 20-30px
+                    // Middle (index 4-8): 40-60px
+                    // Far back (index 9+): 80-120px+
+                    const basePushback = 20;
+                    const distanceBonus = Math.pow(distanceFromHead, 1.5) * 8;
+                    const wavePushback = Math.min(waveNum * 1.5, 30);
+                    const totalPushback = Math.min(basePushback + distanceBonus + wavePushback, 150);
+
+                    snake.segs.splice(index, 1);
+
+                    for (let seg of snake.segs) {
+                        seg.ty -= totalPushback;
+                        seg.ty = Math.max(seg.ty, 60); // Don't go above screen
+                    }
+
+                    // Distant kills pause descent for 3 seconds
+                    if (distanceFromHead >= 5) {
+                        snake.descPaused = 3000; // 3 second pause
+                        spawnText(s.x, s.y, 'MEGA PUSHBACK!', 255, 100, 255);
+                    } else if (distanceFromHead >= 3) {
+                        snake.descPaused = 1500; // 1.5 second pause
+                        spawnText(s.x, s.y, 'BIG PUSHBACK!', 255, 150, 100);
+                    } else {
+                        spawnText(s.x, s.y, 'PUSHBACK', 255, 200, 100);
                     }
                 }
             }
 
-            // Power-ups
-            for (let i = pups.length - 1; i >= 0; i--) {
-                const pu = pups[i];
-                pu.y += pu.vy;
-                const dx = pu.x - P.x;
-                const dy = pu.y - P.y;
-                if (dx * dx + dy * dy < 900) {
-                    // All power-ups stack to INSANE levels (max 50)!
-                    if (pu.type === 'rapid') P.rapid = Math.min(P.rapid + 1, MAX_POWER_LEVEL);
-                    else if (pu.type === 'spread') P.spread = Math.min(P.spread + 1, MAX_POWER_LEVEL);
-                    else if (pu.type === 'damage') P.damage = Math.min(P.damage + 1, MAX_POWER_LEVEL);
-                    else if (pu.type === 'multi') P.multi = Math.min(P.multi + 1, MAX_POWER_LEVEL);
-                    else if (pu.type === 'rocket') P.rockets = Math.min(P.rockets + 2, MAX_ROCKETS);
-                    
-                    updatePowerUpUI();
-                    spawnParticle(pu.x, pu.y, 255, 215, 0, 6);
-                    spawnText(pu.x, pu.y - 18, pu.type.toUpperCase() + (pu.type !== 'rocket' ? ' +1' : ' x2'), 255, 215, 0);
-                    pups.splice(i, 1);
-                    continue;
+            // === UPDATE ===
+            function update(dt, now) {
+                if (!running || paused) return;
+
+                // Shoot based on fire mode setting
+                if (gameSettings.fireMode === 'automatic' || firing) shoot(now);
+
+                // Bullets
+                for (let b of POOL.bullets) {
+                    if (!b.on) continue;
+                    b.x += b.vx;
+                    b.y += b.vy;
+                    if (b.y < -15 || b.x < -15 || b.x > canvas.width + 15) {
+                        b.on = false;
+                        comboCount = 0;
+                    }
                 }
-                if (pu.y > canvas.height + 20) pups.splice(i, 1);
-            }
 
-            // Particles
-            for (let p of POOL.particles) {
-                if (!p.on) continue;
-                p.x += p.vx;
-                p.y += p.vy;
-                p.vx *= 0.95;
-                p.vy *= 0.95;
-                p.life -= 0.035;
-                if (p.life <= 0) p.on = false;
-            }
+                // Rockets
+                for (let r of POOL.rockets) {
+                    if (!r.on) continue;
+                    r.y += r.vy;
 
-            // Texts
-            for (let t of POOL.texts) {
-                if (!t.on) continue;
-                t.y -= 1.5;
-                t.life -= 0.028;
-                if (t.life <= 0) t.on = false;
-            }
+                    // Check collision with segments
+                    let hit = false;
+                    for (let s of snake.segs) {
+                        if (s.hp <= 0) continue;
+                        const dx = r.x - s.x;
+                        const dy = r.y - s.y;
+                        if (dx * dx + dy * dy < s.size * s.size) {
+                            createExplosion(r.x, r.y);
+                            r.on = false;
+                            hit = true;
+                            break;
+                        }
+                    }
 
-            // Game over
-            for (let s of snake.segs) {
-                if (s.y > canvas.height - 70) { gameOver(); return; }
-            }
+                    // Off screen - explode anyway
+                    if (!hit && r.y < -20) {
+                        createExplosion(r.x, 30);
+                        r.on = false;
+                    }
+                }
 
-            // Combo decay
-            if (comboTime > 0) {
-                comboTime--;
-                if (comboTime === 0) comboCount = 0;
-            }
+                // Explosions (visual only, damage already applied)
+                for (let e of POOL.explosions) {
+                    if (!e.on) continue;
+                    e.r += (e.maxR - e.r) * 0.2;
+                    e.life -= 0.06;
+                    if (e.life <= 0) e.on = false;
+                }
 
-            // Throttled UI
-            if (now - lastUIUpdate > 100) {
-                lastUIUpdate = now;
-                DOM.score.textContent = formatNumber(score);
-                DOM.wave.textContent = waveNum;
-                if (comboCount > 1) {
-                    DOM.combo.textContent = 'x' + comboCount;
-                    DOM.combo.classList.add('on');
-                } else {
-                    DOM.combo.classList.remove('on');
+                // Snake movement
+                if (snake.segs.length > 0) {
+                    snake.moveT += dt;
+                    snake.descT += dt;
+
+                    if (snake.moveT > 50) {
+                        snake.moveT = 0;
+                        const head = snake.segs[0];
+                        if (head) {
+                            head.tx += snake.dir * snake.spd * 30;
+                            if (head.tx < 45 || head.tx > canvas.width - 45) snake.dir *= -1;
+                        }
+
+                        for (let i = 1; i < snake.segs.length; i++) {
+                            const s = snake.segs[i];
+                            const p = snake.segs[i - 1];
+                            if (!s || !p) continue;
+                            const dx = p.x - s.tx;
+                            const dy = p.y - s.ty;
+                            const d = Math.sqrt(dx * dx + dy * dy);
+                            const target = s.size * 1.4;
+                            if (d > target) {
+                                const ratio = (d - target) / d;
+                                s.tx += dx * ratio;
+                                s.ty += dy * ratio;
+                            }
+                        }
+                    }
+
+                    // Handle descent pause from strategic tail kills
+                    if (snake.descPaused > 0) {
+                        snake.descPaused -= dt;
+                    } else if (snake.descT > snake.descInt) {
+                        snake.descT = 0;
+                        const descAmount = getDescendAmount(waveNum);
+                        for (let s of snake.segs) s.ty += descAmount;
+                    }
+
+                    for (let s of snake.segs) {
+                        s.x += (s.tx - s.x) * 0.12;
+                        s.y += (s.ty - s.y) * 0.12;
+                        if (s.flash > 0) s.flash -= dt * 0.004;
+                    }
+                }
+
+                // Bullet collision
+                for (let b of POOL.bullets) {
+                    if (!b.on) continue;
+                    for (let i = 0; i < snake.segs.length; i++) {
+                        const s = snake.segs[i];
+                        if (s.hp <= 0) continue;
+                        const dx = b.x - s.x;
+                        const dy = b.y - s.y;
+                        if (dx * dx + dy * dy < s.size * s.size) {
+                            s.hp -= b.dmg;
+                            s.flash = 1;
+                            b.on = false;
+
+                            comboCount++;
+                            comboTime = 50;
+
+                            spawnParticle(b.x, b.y, 0, 255, 136, 2);
+
+                            // Score scales with damage dealt for big satisfying numbers
+                            const pts = Math.floor(b.dmg * (1 + comboCount * 0.05));
+                            score += pts;
+                            spawnText(s.x, s.y - 18, '+' + formatNumber(pts), 0, 255, 255);
+
+                            if (s.hp <= 0) {
+                                handleSegmentDeath(s, i);
+                            }
+                            updateBossUI();
+                            break;
+                        }
+                    }
+                }
+
+                // Power-ups
+                for (let i = pups.length - 1; i >= 0; i--) {
+                    const pu = pups[i];
+                    pu.y += pu.vy;
+                    const dx = pu.x - P.x;
+                    const dy = pu.y - P.y;
+                    if (dx * dx + dy * dy < 900) {
+                        // All power-ups stack to INSANE levels (max 50)!
+                        if (pu.type === 'rapid') P.rapid = Math.min(P.rapid + 1, MAX_POWER_LEVEL);
+                        else if (pu.type === 'spread') P.spread = Math.min(P.spread + 1, MAX_POWER_LEVEL);
+                        else if (pu.type === 'damage') P.damage = Math.min(P.damage + 1, MAX_POWER_LEVEL);
+                        else if (pu.type === 'multi') P.multi = Math.min(P.multi + 1, MAX_POWER_LEVEL);
+                        else if (pu.type === 'rocket') P.rockets = Math.min(P.rockets + 2, MAX_ROCKETS);
+
+                        updatePowerUpUI();
+                        spawnParticle(pu.x, pu.y, 255, 215, 0, 6);
+                        spawnText(pu.x, pu.y - 18, pu.type.toUpperCase() + (pu.type !== 'rocket' ? ' +1' : ' x2'), 255, 215, 0);
+                        pups.splice(i, 1);
+                        continue;
+                    }
+                    if (pu.y > canvas.height + 20) pups.splice(i, 1);
+                }
+
+                // Particles
+                for (let p of POOL.particles) {
+                    if (!p.on) continue;
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vx *= 0.95;
+                    p.vy *= 0.95;
+                    p.life -= 0.035;
+                    if (p.life <= 0) p.on = false;
+                }
+
+                // Texts
+                for (let t of POOL.texts) {
+                    if (!t.on) continue;
+                    t.y -= 1.5;
+                    t.life -= 0.028;
+                    if (t.life <= 0) t.on = false;
+                }
+
+                // Game over
+                for (let s of snake.segs) {
+                    if (s.y > canvas.height - 70) { gameOver(); return; }
+                }
+
+                // Combo decay
+                if (comboTime > 0) {
+                    comboTime--;
+                    if (comboTime === 0) comboCount = 0;
+                }
+
+                // Throttled UI
+                if (now - lastUIUpdate > 100) {
+                    lastUIUpdate = now;
+                    DOM.score.textContent = formatNumber(score);
+                    DOM.wave.textContent = waveNum;
+                    if (comboCount > 1) {
+                        DOM.combo.textContent = 'x' + comboCount;
+                        DOM.combo.classList.add('on');
+                    } else {
+                        DOM.combo.classList.remove('on');
+                    }
                 }
             }
-        }
 
-        // === DRAW ===
-        function draw() {
-            ctx.fillStyle = '#0a0a12';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // === DRAW ===
+            function draw() {
+                ctx.fillStyle = '#0a0a12';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Grid
-            ctx.strokeStyle = 'rgba(255,255,255,0.02)';
-            ctx.lineWidth = 1;
-            for (let x = 0; x < canvas.width; x += 50) {
-                ctx.beginPath();
-                ctx.moveTo(x, 0);
-                ctx.lineTo(x, canvas.height);
-                ctx.stroke();
-            }
-
-            // Explosions
-            for (let e of POOL.explosions) {
-                if (!e.on) continue;
-                ctx.globalAlpha = e.life * 0.6;
-                ctx.strokeStyle = '#ff6600';
-                ctx.lineWidth = 3;
-                ctx.beginPath();
-                ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
-                ctx.stroke();
-                ctx.fillStyle = `rgba(255, 100, 0, ${e.life * 0.2})`;
-                ctx.fill();
-            }
-            ctx.globalAlpha = 1;
-
-            // Particles
-            for (let p of POOL.particles) {
-                if (!p.on) continue;
-                ctx.globalAlpha = p.life;
-                ctx.fillStyle = `rgb(${p.r},${p.g},${p.b})`;
-                ctx.fillRect(p.x - p.size/2, p.y - p.size/2, p.size * p.life, p.size * p.life);
-            }
-            ctx.globalAlpha = 1;
-
-            // Power-ups
-            ctx.font = '20px Arial';
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            for (let pu of pups) {
-                let color = '#ffff00', icon = '⚡';
-                if (pu.type === 'spread') { color = '#00ffff'; icon = '◇'; }
-                if (pu.type === 'damage') { color = '#ff0080'; icon = '💥'; }
-                if (pu.type === 'multi') { color = '#00ff88'; icon = '⬡'; }
-                if (pu.type === 'rocket') { color = '#ff3333'; icon = '🚀'; }
-                ctx.fillStyle = color;
-                ctx.fillText(icon, pu.x, pu.y);
-            }
-
-            // Snake
-            for (let i = snake.segs.length - 1; i >= 0; i--) {
-                const s = snake.segs[i];
-                if (s.hp <= 0) continue;
-
-                if (i > 0) {
-                    const next = snake.segs[i - 1];
-                    ctx.strokeStyle = 'rgba(255,255,255,0.15)';
-                    ctx.lineWidth = 2;
+                // Grid
+                ctx.strokeStyle = 'rgba(255,255,255,0.02)';
+                ctx.lineWidth = 1;
+                for (let x = 0; x < canvas.width; x += 50) {
                     ctx.beginPath();
-                    ctx.moveTo(s.x, s.y);
-                    ctx.lineTo(next.x, next.y);
+                    ctx.moveTo(x, 0);
+                    ctx.lineTo(x, canvas.height);
                     ctx.stroke();
                 }
 
-                const hpPct = s.hp / s.maxHP;
-                let fill = s.head ? 'rgba(120,25,50,0.9)' : hpPct > 0.5 ? 'rgba(35,35,45,0.85)' : 'rgba(55,35,25,0.85)';
-                let stroke = s.flash > 0 ? '#fff' : s.head ? '#ff0080' : hpPct > 0.5 ? '#666' : '#ff8800';
-
-                ctx.fillStyle = fill;
-                ctx.strokeStyle = stroke;
-                ctx.lineWidth = s.head ? 3 : 2;
-                ctx.beginPath();
-                for (let j = 0; j < 6; j++) {
-                    const a = (Math.PI / 3) * j - Math.PI / 2;
-                    const px = s.x + s.size * Math.cos(a);
-                    const py = s.y + s.size * Math.sin(a);
-                    j === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+                // Explosions
+                for (let e of POOL.explosions) {
+                    if (!e.on) continue;
+                    ctx.globalAlpha = e.life * 0.6;
+                    ctx.strokeStyle = '#ff6600';
+                    ctx.lineWidth = 3;
+                    ctx.beginPath();
+                    ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2);
+                    ctx.stroke();
+                    ctx.fillStyle = `rgba(255, 100, 0, ${e.life * 0.2})`;
+                    ctx.fill();
                 }
-                ctx.closePath();
-                ctx.fill();
-                ctx.stroke();
+                ctx.globalAlpha = 1;
 
-                ctx.fillStyle = '#fff';
-                ctx.font = s.head ? 'bold 11px Orbitron' : '9px Share Tech Mono';
+                // Particles
+                for (let p of POOL.particles) {
+                    if (!p.on) continue;
+                    ctx.globalAlpha = p.life;
+                    ctx.fillStyle = `rgb(${p.r},${p.g},${p.b})`;
+                    ctx.fillRect(p.x - p.size / 2, p.y - p.size / 2, p.size * p.life, p.size * p.life);
+                }
+                ctx.globalAlpha = 1;
+
+                // Power-ups
+                ctx.font = '20px Arial';
                 ctx.textAlign = 'center';
                 ctx.textBaseline = 'middle';
-                // Format large HP numbers for readability
-                const hpDisplay = s.head ? 'x' + Math.ceil(s.hp / s.perBar) : formatNumber(s.hp);
-                ctx.fillText(hpDisplay, s.x, s.y);
-
-                if (s.pup) {
+                for (let pu of pups) {
                     let color = '#ffff00', icon = '⚡';
-                    if (s.pupType === 'spread') { color = '#00ffff'; icon = '◇'; }
-                    if (s.pupType === 'damage') { color = '#ff0080'; icon = '💥'; }
-                    if (s.pupType === 'multi') { color = '#00ff88'; icon = '⬡'; }
-                    if (s.pupType === 'rocket') { color = '#ff3333'; icon = '🚀'; }
+                    if (pu.type === 'spread') { color = '#00ffff'; icon = '◇'; }
+                    if (pu.type === 'damage') { color = '#ff0080'; icon = '💥'; }
+                    if (pu.type === 'multi') { color = '#00ff88'; icon = '⬡'; }
+                    if (pu.type === 'rocket') { color = '#ff3333'; icon = '🚀'; }
                     ctx.fillStyle = color;
-                    ctx.font = '9px Arial';
-                    ctx.fillText(icon, s.x + s.size * 0.6, s.y - s.size * 0.5);
+                    ctx.fillText(icon, pu.x, pu.y);
                 }
 
-                if (s.head) {
-                    ctx.fillStyle = '#ffff00';
-                    ctx.beginPath();
-                    ctx.arc(s.x - 10, s.y - 8, 5, 0, Math.PI * 2);
-                    ctx.arc(s.x + 10, s.y - 8, 5, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.fillStyle = '#ff0000';
-                    ctx.beginPath();
-                    ctx.arc(s.x - 10, s.y - 8, 2, 0, Math.PI * 2);
-                    ctx.arc(s.x + 10, s.y - 8, 2, 0, Math.PI * 2);
-                    ctx.fill();
+                // Snake
+                for (let i = snake.segs.length - 1; i >= 0; i--) {
+                    const s = snake.segs[i];
+                    if (s.hp <= 0) continue;
 
-                    ctx.fillStyle = '#ffcc00';
+                    if (i > 0) {
+                        const next = snake.segs[i - 1];
+                        ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.moveTo(s.x, s.y);
+                        ctx.lineTo(next.x, next.y);
+                        ctx.stroke();
+                    }
+
+                    const hpPct = s.hp / s.maxHP;
+                    let fill = s.head ? 'rgba(120,25,50,0.9)' : hpPct > 0.5 ? 'rgba(35,35,45,0.85)' : 'rgba(55,35,25,0.85)';
+                    let stroke = s.flash > 0 ? '#fff' : s.head ? '#ff0080' : hpPct > 0.5 ? '#666' : '#ff8800';
+
+                    ctx.fillStyle = fill;
+                    ctx.strokeStyle = stroke;
+                    ctx.lineWidth = s.head ? 3 : 2;
                     ctx.beginPath();
-                    ctx.moveTo(s.x - s.size * 0.45, s.y - s.size * 0.35);
-                    ctx.lineTo(s.x - s.size * 0.65, s.y - s.size);
-                    ctx.lineTo(s.x - s.size * 0.15, s.y - s.size * 0.45);
+                    for (let j = 0; j < 6; j++) {
+                        const a = (Math.PI / 3) * j - Math.PI / 2;
+                        const px = s.x + s.size * Math.cos(a);
+                        const py = s.y + s.size * Math.sin(a);
+                        j === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+                    }
+                    ctx.closePath();
                     ctx.fill();
+                    ctx.stroke();
+
+                    ctx.fillStyle = '#fff';
+                    ctx.font = s.head ? 'bold 11px Orbitron' : '9px Share Tech Mono';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    // Format large HP numbers for readability
+                    const hpDisplay = s.head ? 'x' + Math.ceil(s.hp / s.perBar) : formatNumber(s.hp);
+                    ctx.fillText(hpDisplay, s.x, s.y);
+
+                    if (s.pup) {
+                        let color = '#ffff00', icon = '⚡';
+                        if (s.pupType === 'spread') { color = '#00ffff'; icon = '◇'; }
+                        if (s.pupType === 'damage') { color = '#ff0080'; icon = '💥'; }
+                        if (s.pupType === 'multi') { color = '#00ff88'; icon = '⬡'; }
+                        if (s.pupType === 'rocket') { color = '#ff3333'; icon = '🚀'; }
+                        ctx.fillStyle = color;
+                        ctx.font = '9px Arial';
+                        ctx.fillText(icon, s.x + s.size * 0.6, s.y - s.size * 0.5);
+                    }
+
+                    if (s.head) {
+                        ctx.fillStyle = '#ffff00';
+                        ctx.beginPath();
+                        ctx.arc(s.x - 10, s.y - 8, 5, 0, Math.PI * 2);
+                        ctx.arc(s.x + 10, s.y - 8, 5, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.fillStyle = '#ff0000';
+                        ctx.beginPath();
+                        ctx.arc(s.x - 10, s.y - 8, 2, 0, Math.PI * 2);
+                        ctx.arc(s.x + 10, s.y - 8, 2, 0, Math.PI * 2);
+                        ctx.fill();
+
+                        ctx.fillStyle = '#ffcc00';
+                        ctx.beginPath();
+                        ctx.moveTo(s.x - s.size * 0.45, s.y - s.size * 0.35);
+                        ctx.lineTo(s.x - s.size * 0.65, s.y - s.size);
+                        ctx.lineTo(s.x - s.size * 0.15, s.y - s.size * 0.45);
+                        ctx.fill();
+                        ctx.beginPath();
+                        ctx.moveTo(s.x + s.size * 0.45, s.y - s.size * 0.35);
+                        ctx.lineTo(s.x + s.size * 0.65, s.y - s.size);
+                        ctx.lineTo(s.x + s.size * 0.15, s.y - s.size * 0.45);
+                        ctx.fill();
+                    }
+                }
+
+                // Rockets
+                for (let r of POOL.rockets) {
+                    if (!r.on) continue;
+                    ctx.fillStyle = '#ff3333';
                     ctx.beginPath();
-                    ctx.moveTo(s.x + s.size * 0.45, s.y - s.size * 0.35);
-                    ctx.lineTo(s.x + s.size * 0.65, s.y - s.size);
-                    ctx.lineTo(s.x + s.size * 0.15, s.y - s.size * 0.45);
+                    ctx.moveTo(r.x, r.y - 12);
+                    ctx.lineTo(r.x - 5, r.y + 8);
+                    ctx.lineTo(r.x + 5, r.y + 8);
+                    ctx.closePath();
+                    ctx.fill();
+                    // Flame
+                    ctx.fillStyle = '#ffaa00';
+                    ctx.beginPath();
+                    ctx.moveTo(r.x - 3, r.y + 8);
+                    ctx.lineTo(r.x, r.y + 16 + Math.random() * 4);
+                    ctx.lineTo(r.x + 3, r.y + 8);
                     ctx.fill();
                 }
-            }
 
-            // Rockets
-            for (let r of POOL.rockets) {
-                if (!r.on) continue;
-                ctx.fillStyle = '#ff3333';
+                // Bullets
+                ctx.fillStyle = '#00ff88';
+                for (let b of POOL.bullets) {
+                    if (!b.on) continue;
+                    ctx.fillRect(b.x - 1.5, b.y - 6, 3, 12);
+                }
+
+                // Player
+                ctx.save();
+                ctx.translate(P.x, P.y);
                 ctx.beginPath();
-                ctx.moveTo(r.x, r.y - 12);
-                ctx.lineTo(r.x - 5, r.y + 8);
-                ctx.lineTo(r.x + 5, r.y + 8);
+                ctx.moveTo(0, -22);
+                ctx.lineTo(-12, 16);
+                ctx.lineTo(-4, 12);
+                ctx.lineTo(0, 20);
+                ctx.lineTo(4, 12);
+                ctx.lineTo(12, 16);
                 ctx.closePath();
+                ctx.fillStyle = 'rgba(0,35,40,0.9)';
                 ctx.fill();
-                // Flame
-                ctx.fillStyle = '#ffaa00';
+                ctx.strokeStyle = '#00ff88';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
                 ctx.beginPath();
-                ctx.moveTo(r.x - 3, r.y + 8);
-                ctx.lineTo(r.x, r.y + 16 + Math.random() * 4);
-                ctx.lineTo(r.x + 3, r.y + 8);
+                ctx.ellipse(0, -2, 3, 6, 0, 0, Math.PI * 2);
+                ctx.fillStyle = '#00ffff';
                 ctx.fill();
-            }
 
-            // Bullets
-            ctx.fillStyle = '#00ff88';
-            for (let b of POOL.bullets) {
-                if (!b.on) continue;
-                ctx.fillRect(b.x - 1.5, b.y - 6, 3, 12);
-            }
+                ctx.beginPath();
+                ctx.moveTo(-3, 14);
+                ctx.lineTo(0, 26 + Math.random() * 3);
+                ctx.lineTo(3, 14);
+                ctx.fillStyle = `rgba(0,255,136,${0.5 + Math.random() * 0.4})`;
+                ctx.fill();
+                ctx.restore();
 
-            // Player
-            ctx.save();
-            ctx.translate(P.x, P.y);
-            ctx.beginPath();
-            ctx.moveTo(0, -22);
-            ctx.lineTo(-12, 16);
-            ctx.lineTo(-4, 12);
-            ctx.lineTo(0, 20);
-            ctx.lineTo(4, 12);
-            ctx.lineTo(12, 16);
-            ctx.closePath();
-            ctx.fillStyle = 'rgba(0,35,40,0.9)';
-            ctx.fill();
-            ctx.strokeStyle = '#00ff88';
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            ctx.beginPath();
-            ctx.ellipse(0, -2, 3, 6, 0, 0, Math.PI * 2);
-            ctx.fillStyle = '#00ffff';
-            ctx.fill();
-
-            ctx.beginPath();
-            ctx.moveTo(-3, 14);
-            ctx.lineTo(0, 26 + Math.random() * 3);
-            ctx.lineTo(3, 14);
-            ctx.fillStyle = `rgba(0,255,136,${0.5 + Math.random() * 0.4})`;
-            ctx.fill();
-            ctx.restore();
-
-            // Texts
-            ctx.font = 'bold 14px Share Tech Mono';
-            ctx.textAlign = 'center';
-            for (let t of POOL.texts) {
-                if (!t.on) continue;
-                ctx.globalAlpha = t.life;
-                ctx.fillStyle = `rgb(${t.r},${t.g},${t.b})`;
-                ctx.fillText(t.txt, t.x, t.y);
-            }
-            ctx.globalAlpha = 1;
-        }
-
-        // === UI ===
-        function updatePowerUpUI() {
-            DOM.pwrRapid.classList.toggle('on', P.rapid > 0);
-            DOM.pwrSpread.classList.toggle('on', P.spread > 0);
-            DOM.pwrDamage.classList.toggle('on', P.damage > 0);
-            DOM.pwrMulti.classList.toggle('on', P.multi > 0);
-            DOM.pwrRocket.classList.toggle('on', P.rockets > 0);
-            
-            DOM.rapidLvl.textContent = P.rapid;
-            DOM.spreadLvl.textContent = P.spread;
-            DOM.damageLvl.textContent = P.damage;
-            DOM.multiLvl.textContent = P.multi;
-            DOM.rocketLvl.textContent = P.rockets;
-        }
-
-        function updateBossUI() {
-            const head = snake.segs.find(s => s.head);
-            if (head && head.hp > 0) {
-                DOM.bossHP.classList.add('show');
-                DOM.bossBar.style.width = (head.hp / head.maxHP * 100) + '%';
-                // Display formatted HP value
-                DOM.bossHPValue.textContent = formatNumber(head.hp) + ' / ' + formatNumber(head.maxHP);
-                const bars = Math.ceil(head.hp / head.perBar);
-                DOM.bossPips.innerHTML = '';
-                for (let i = 0; i < head.bars; i++) {
-                    const pip = document.createElement('div');
-                    pip.className = 'boss-pip' + (i < bars ? ' on' : '');
-                    DOM.bossPips.appendChild(pip);
+                // Texts
+                ctx.font = 'bold 14px Share Tech Mono';
+                ctx.textAlign = 'center';
+                for (let t of POOL.texts) {
+                    if (!t.on) continue;
+                    ctx.globalAlpha = t.life;
+                    ctx.fillStyle = `rgb(${t.r},${t.g},${t.b})`;
+                    ctx.fillText(t.txt, t.x, t.y);
                 }
-            } else {
-                DOM.bossHP.classList.remove('show');
+                ctx.globalAlpha = 1;
             }
-        }
 
-        function showWave() {
-            DOM.waveMsg.textContent = 'WAVE ' + waveNum;
-            DOM.waveMsg.classList.remove('show');
-            void DOM.waveMsg.offsetWidth;
-            DOM.waveMsg.classList.add('show');
-        }
+            // === UI ===
+            function updatePowerUpUI() {
+                DOM.pwrRapid.classList.toggle('on', P.rapid > 0);
+                DOM.pwrSpread.classList.toggle('on', P.spread > 0);
+                DOM.pwrDamage.classList.toggle('on', P.damage > 0);
+                DOM.pwrMulti.classList.toggle('on', P.multi > 0);
+                DOM.pwrRocket.classList.toggle('on', P.rockets > 0);
 
-        // === SAVE/LOAD SYSTEM ===
-        const SAVE_KEY = 'neonWingsSave';
-
-        function saveGame() {
-            const saveData = {
-                score: score,
-                waveNum: waveNum,
-                playerX: P.x,
-                playerY: P.y,
-                rapid: P.rapid,
-                spread: P.spread,
-                damage: P.damage,
-                multi: P.multi,
-                rockets: P.rockets,
-                timestamp: Date.now()
-            };
-            try {
-                localStorage.setItem(SAVE_KEY, JSON.stringify(saveData));
-            } catch (e) {
-                console.error('Failed to save game:', e);
+                DOM.rapidLvl.textContent = P.rapid;
+                DOM.spreadLvl.textContent = P.spread;
+                DOM.damageLvl.textContent = P.damage;
+                DOM.multiLvl.textContent = P.multi;
+                DOM.rocketLvl.textContent = P.rockets;
             }
-        }
 
-        function loadGame() {
-            try {
-                const saved = localStorage.getItem(SAVE_KEY);
-                if (!saved) return null;
-                return JSON.parse(saved);
-            } catch (e) {
-                console.error('Failed to load game:', e);
-                return null;
-            }
-        }
-
-        function clearSave() {
-            try {
-                localStorage.removeItem(SAVE_KEY);
-            } catch (e) {
-                console.error('Failed to clear save:', e);
-            }
-        }
-
-        function applySave(saveData) {
-            score = saveData.score;
-            waveNum = saveData.waveNum;
-            P.x = saveData.playerX;
-            P.y = saveData.playerY;
-            P.rapid = saveData.rapid;
-            P.spread = saveData.spread;
-            P.damage = saveData.damage;
-            P.multi = saveData.multi;
-            P.rockets = saveData.rockets;
-        }
-
-        // === GAME CONTROL ===
-        function start(continueGame = false) {
-            DOM.startScreen.classList.add('hide');
-            DOM.overScreen.classList.add('hide');
-            DOM.victoryScreen.classList.add('hide');
-
-            running = true;
-            paused = false;
-            
-            // Clear pools
-            for (let b of POOL.bullets) b.on = false;
-            for (let r of POOL.rockets) r.on = false;
-            for (let e of POOL.explosions) e.on = false;
-            for (let p of POOL.particles) p.on = false;
-            for (let t of POOL.texts) t.on = false;
-            pups = [];
-
-            if (continueGame) {
-                // Load saved game state
-                const saveData = loadGame();
-                if (saveData) {
-                    applySave(saveData);
+            function updateBossUI() {
+                const head = snake.segs.find(s => s.head);
+                if (head && head.hp > 0) {
+                    DOM.bossHP.classList.add('show');
+                    DOM.bossBar.style.width = (head.hp / head.maxHP * 100) + '%';
+                    // Display formatted HP value
+                    DOM.bossHPValue.textContent = formatNumber(head.hp) + ' / ' + formatNumber(head.maxHP);
+                    const bars = Math.ceil(head.hp / head.perBar);
+                    DOM.bossPips.innerHTML = '';
+                    for (let i = 0; i < head.bars; i++) {
+                        const pip = document.createElement('div');
+                        pip.className = 'boss-pip' + (i < bars ? ' on' : '');
+                        DOM.bossPips.appendChild(pip);
+                    }
                 } else {
-                    // No save found, start fresh
+                    DOM.bossHP.classList.remove('show');
+                }
+            }
+
+            function showWave() {
+                DOM.waveMsg.textContent = 'WAVE ' + waveNum;
+                DOM.waveMsg.classList.remove('show');
+                void DOM.waveMsg.offsetWidth;
+                DOM.waveMsg.classList.add('show');
+            }
+
+            // === SAVE/LOAD SYSTEM ===
+            const SAVE_KEY = 'neonWingsSave';
+
+            function saveGame() {
+                const saveData = {
+                    score: score,
+                    waveNum: waveNum,
+                    playerX: P.x,
+                    playerY: P.y,
+                    rapid: P.rapid,
+                    spread: P.spread,
+                    damage: P.damage,
+                    multi: P.multi,
+                    rockets: P.rockets,
+                    timestamp: Date.now()
+                };
+                try {
+                    localStorage.setItem(SAVE_KEY, JSON.stringify(saveData));
+                } catch (e) {
+                    console.error('Failed to save game:', e);
+                }
+            }
+
+            function loadGame() {
+                try {
+                    const saved = localStorage.getItem(SAVE_KEY);
+                    if (!saved) return null;
+                    return JSON.parse(saved);
+                } catch (e) {
+                    console.error('Failed to load game:', e);
+                    return null;
+                }
+            }
+
+            function clearSave() {
+                try {
+                    localStorage.removeItem(SAVE_KEY);
+                } catch (e) {
+                    console.error('Failed to clear save:', e);
+                }
+            }
+
+            function applySave(saveData) {
+                score = saveData.score;
+                waveNum = saveData.waveNum;
+                P.x = saveData.playerX;
+                P.y = saveData.playerY;
+                P.rapid = saveData.rapid;
+                P.spread = saveData.spread;
+                P.damage = saveData.damage;
+                P.multi = saveData.multi;
+                P.rockets = saveData.rockets;
+            }
+
+            // === GAME CONTROL ===
+            function start(continueGame = false) {
+                DOM.startScreen.classList.add('hide');
+                DOM.overScreen.classList.add('hide');
+                DOM.victoryScreen.classList.add('hide');
+
+                running = true;
+                paused = false;
+
+                // Clear pools
+                for (let b of POOL.bullets) b.on = false;
+                for (let r of POOL.rockets) r.on = false;
+                for (let e of POOL.explosions) e.on = false;
+                for (let p of POOL.particles) p.on = false;
+                for (let t of POOL.texts) t.on = false;
+                pups = [];
+
+                if (continueGame) {
+                    // Load saved game state
+                    const saveData = loadGame();
+                    if (saveData) {
+                        applySave(saveData);
+                    } else {
+                        // No save found, start fresh
+                        resetGameState();
+                    }
+                } else {
+                    // New game - clear save and reset
+                    clearSave();
                     resetGameState();
                 }
-            } else {
-                // New game - clear save and reset
-                clearSave();
-                resetGameState();
+
+                comboCount = 0;
+                updatePowerUpUI();
+                initSnake();
+                showWave();
             }
 
-            comboCount = 0;
-            updatePowerUpUI();
-            initSnake();
-            showWave();
-        }
-
-        function resetGameState() {
-            score = 0;
-            waveNum = 1;
-            P.x = canvas.width / 2;
-            P.y = canvas.height - 70;
-            P.rapid = 0;
-            P.spread = 0;
-            P.damage = 0;
-            P.multi = 0;
-            P.rockets = 0;
-        }
-
-        function gameOver() {
-            running = false;
-            clearSave(); // Clear save on game over
-            DOM.overScreen.classList.remove('hide');
-            DOM.endScore.textContent = formatNumber(score);
-            DOM.endWave.textContent = 'Wave ' + waveNum;
-        }
-
-        function togglePause(forcePause = null) {
-            if (!running) return;
-            if (shopOpen) return; // Don't toggle pause while shop is open
-            
-            const shouldPause = forcePause !== null ? forcePause : !paused;
-            
-            if (shouldPause && !paused) {
-                paused = true;
-                DOM.pauseScreen.classList.remove('hide');
-                // Don't auto-save on pause - only save explicitly via button or at wave completion
-            } else if (!shouldPause && paused) {
-                paused = false;
-                DOM.pauseScreen.classList.add('hide');
-                lastFrame = performance.now(); // Reset frame time to avoid jump
+            function resetGameState() {
+                score = 0;
+                waveNum = 1;
+                P.x = canvas.width / 2;
+                P.y = canvas.height - 70;
+                P.rapid = 0;
+                P.spread = 0;
+                P.damage = 0;
+                P.multi = 0;
+                P.rockets = 0;
             }
-        }
 
-        // === SHOP SYSTEM ===
-        const SHOP_BASE_COSTS = {
-            rapid: 100,
-            spread: 150,
-            damage: 200,   // Most valuable
-            multi: 150,
-            rocket: 50     // Flat cost for +5 rockets
-        };
-
-        function getUpgradeCost(type, currentLevel) {
-            const diffMultiplier = DIFFICULTY_MULTIPLIERS[gameSettings.difficulty] || 1.0;
-            if (type === 'rocket') {
-                // Rockets have flat cost, scaled by difficulty
-                return Math.floor(SHOP_BASE_COSTS.rocket * diffMultiplier);
+            function gameOver() {
+                running = false;
+                clearSave(); // Clear save on game over
+                DOM.overScreen.classList.remove('hide');
+                DOM.endScore.textContent = formatNumber(score);
+                DOM.endWave.textContent = 'Wave ' + waveNum;
             }
-            // Exponential scaling: baseCost × 1.5^level × difficulty multiplier
-            return Math.floor(SHOP_BASE_COSTS[type] * Math.pow(1.5, currentLevel) * diffMultiplier);
-        }
 
-        function toggleShop() {
-            if (!running) return;
-            if (paused && !shopOpen) return; // Can't open shop while paused
-            
-            if (shopOpen) {
-                // Close shop
-                shopOpen = false;
-                paused = false;
-                DOM.shopScreen.classList.add('hide');
-                DOM.shopBtn.classList.remove('disabled');
-                lastFrame = performance.now();
-            } else {
-                // Open shop
-                shopOpen = true;
-                paused = true;
-                updateShopUI();
-                DOM.shopScreen.classList.remove('hide');
-            }
-        }
+            function togglePause(forcePause = null) {
+                if (!running) return;
+                if (shopOpen) return; // Don't toggle pause while shop is open
 
-        function updateShopUI() {
-            // Update score display
-            DOM.shopScore.textContent = formatNumber(score);
-            
-            // Update each item
-            const items = [
-                { type: 'rapid', lvl: P.rapid, lvlEl: DOM.shopRapidLvl, btnEl: DOM.buyRapid },
-                { type: 'spread', lvl: P.spread, lvlEl: DOM.shopSpreadLvl, btnEl: DOM.buySpread },
-                { type: 'damage', lvl: P.damage, lvlEl: DOM.shopDamageLvl, btnEl: DOM.buyDamage },
-                { type: 'multi', lvl: P.multi, lvlEl: DOM.shopMultiLvl, btnEl: DOM.buyMulti }
-            ];
-            
-            for (const item of items) {
-                const cost = getUpgradeCost(item.type, item.lvl);
-                const isMaxed = item.lvl >= MAX_POWER_LEVEL;
-                const canAfford = score >= cost;
-                
-                item.lvlEl.textContent = `Level ${item.lvl} / ${MAX_POWER_LEVEL}`;
-                
-                if (isMaxed) {
-                    item.btnEl.textContent = 'MAXED';
-                    item.btnEl.className = 'shop-buy-btn maxed';
-                } else if (canAfford) {
-                    item.btnEl.textContent = formatNumber(cost);
-                    item.btnEl.className = 'shop-buy-btn';
-                } else {
-                    item.btnEl.textContent = formatNumber(cost);
-                    item.btnEl.className = 'shop-buy-btn cannot-afford';
+                const shouldPause = forcePause !== null ? forcePause : !paused;
+
+                if (shouldPause && !paused) {
+                    paused = true;
+                    DOM.pauseScreen.classList.remove('hide');
+                    // Don't auto-save on pause - only save explicitly via button or at wave completion
+                } else if (!shouldPause && paused) {
+                    paused = false;
+                    DOM.pauseScreen.classList.add('hide');
+                    lastFrame = performance.now(); // Reset frame time to avoid jump
                 }
             }
-            
-            // Rockets (special case)
-            const rocketCost = SHOP_BASE_COSTS.rocket;
-            const rocketsMaxed = P.rockets >= MAX_ROCKETS;
-            const canAffordRockets = score >= rocketCost;
-            
-            DOM.shopRocketLvl.textContent = `x${P.rockets} / ${MAX_ROCKETS}`;
-            
-            if (rocketsMaxed) {
-                DOM.buyRocket.textContent = 'FULL';
-                DOM.buyRocket.className = 'shop-buy-btn maxed';
-            } else if (canAffordRockets) {
-                DOM.buyRocket.textContent = `+5 for ${rocketCost}`;
-                DOM.buyRocket.className = 'shop-buy-btn';
-            } else {
-                DOM.buyRocket.textContent = `+5 for ${rocketCost}`;
-                DOM.buyRocket.className = 'shop-buy-btn cannot-afford';
-            }
-        }
 
-        function buyUpgrade(type) {
-            if (type === 'rocket') {
-                const cost = SHOP_BASE_COSTS.rocket;
-                if (score >= cost && P.rockets < MAX_ROCKETS) {
+            // === SHOP SYSTEM ===
+            const SHOP_BASE_COSTS = {
+                rapid: 100,
+                spread: 150,
+                damage: 200,   // Most valuable
+                multi: 150,
+                rocket: 50     // Flat cost for +5 rockets
+            };
+
+            function getUpgradeCost(type, currentLevel) {
+                const diffMultiplier = DIFFICULTY_MULTIPLIERS[gameSettings.difficulty] || 1.0;
+                if (type === 'rocket') {
+                    // Rockets have flat cost, scaled by difficulty
+                    return Math.floor(SHOP_BASE_COSTS.rocket * diffMultiplier);
+                }
+                // Exponential scaling: baseCost × 1.5^level × difficulty multiplier
+                return Math.floor(SHOP_BASE_COSTS[type] * Math.pow(1.25, currentLevel) * diffMultiplier);
+            }
+
+            function toggleShop() {
+                if (!running) return;
+                if (paused && !shopOpen) return; // Can't open shop while paused
+
+                if (shopOpen) {
+                    // Close shop
+                    shopOpen = false;
+                    paused = false;
+                    DOM.shopScreen.classList.add('hide');
+                    DOM.shopBtn.classList.remove('disabled');
+                    lastFrame = performance.now();
+                } else {
+                    // Open shop
+                    shopOpen = true;
+                    paused = true;
+                    updateShopUI();
+                    DOM.shopScreen.classList.remove('hide');
+                }
+            }
+
+            function updateShopUI() {
+                // Update score display
+                DOM.shopScore.textContent = formatNumber(score);
+
+                // Update each item
+                const items = [
+                    { type: 'rapid', lvl: P.rapid, lvlEl: DOM.shopRapidLvl, btnEl: DOM.buyRapid },
+                    { type: 'spread', lvl: P.spread, lvlEl: DOM.shopSpreadLvl, btnEl: DOM.buySpread },
+                    { type: 'damage', lvl: P.damage, lvlEl: DOM.shopDamageLvl, btnEl: DOM.buyDamage },
+                    { type: 'multi', lvl: P.multi, lvlEl: DOM.shopMultiLvl, btnEl: DOM.buyMulti }
+                ];
+
+                for (const item of items) {
+                    const cost = getUpgradeCost(item.type, item.lvl);
+                    const isMaxed = item.lvl >= MAX_POWER_LEVEL;
+                    const canAfford = score >= cost;
+
+                    item.lvlEl.textContent = `Level ${item.lvl} / ${MAX_POWER_LEVEL}`;
+
+                    if (isMaxed) {
+                        item.btnEl.textContent = 'MAXED';
+                        item.btnEl.className = 'shop-buy-btn maxed';
+                    } else if (canAfford) {
+                        item.btnEl.textContent = formatNumber(cost);
+                        item.btnEl.className = 'shop-buy-btn';
+                    } else {
+                        item.btnEl.textContent = formatNumber(cost);
+                        item.btnEl.className = 'shop-buy-btn cannot-afford';
+                    }
+                }
+
+                // Rockets (special case)
+                const rocketCost = SHOP_BASE_COSTS.rocket;
+                const rocketsMaxed = P.rockets >= MAX_ROCKETS;
+                const canAffordRockets = score >= rocketCost;
+
+                DOM.shopRocketLvl.textContent = `x${P.rockets} / ${MAX_ROCKETS}`;
+
+                if (rocketsMaxed) {
+                    DOM.buyRocket.textContent = 'FULL';
+                    DOM.buyRocket.className = 'shop-buy-btn maxed';
+                } else if (canAffordRockets) {
+                    DOM.buyRocket.textContent = `+5 for ${rocketCost}`;
+                    DOM.buyRocket.className = 'shop-buy-btn';
+                } else {
+                    DOM.buyRocket.textContent = `+5 for ${rocketCost}`;
+                    DOM.buyRocket.className = 'shop-buy-btn cannot-afford';
+                }
+            }
+
+            function buyUpgrade(type) {
+                if (type === 'rocket') {
+                    const cost = SHOP_BASE_COSTS.rocket;
+                    if (score >= cost && P.rockets < MAX_ROCKETS) {
+                        score -= cost;
+                        P.rockets = Math.min(P.rockets + 5, MAX_ROCKETS);
+                        updateShopUI();
+                        updatePowerUpUI();
+                    }
+                    return;
+                }
+
+                const levels = { rapid: 'rapid', spread: 'spread', damage: 'damage', multi: 'multi' };
+                if (!levels[type]) return;
+
+                const currentLevel = P[type];
+                if (currentLevel >= MAX_POWER_LEVEL) return;
+
+                const cost = getUpgradeCost(type, currentLevel);
+                if (score >= cost) {
                     score -= cost;
-                    P.rockets = Math.min(P.rockets + 5, MAX_ROCKETS);
+                    P[type]++;
                     updateShopUI();
                     updatePowerUpUI();
                 }
-                return;
             }
-            
-            const levels = { rapid: 'rapid', spread: 'spread', damage: 'damage', multi: 'multi' };
-            if (!levels[type]) return;
-            
-            const currentLevel = P[type];
-            if (currentLevel >= MAX_POWER_LEVEL) return;
-            
-            const cost = getUpgradeCost(type, currentLevel);
-            if (score >= cost) {
-                score -= cost;
-                P[type]++;
-                updateShopUI();
-                updatePowerUpUI();
+
+            // === LOOP ===
+            function loop(ts) {
+                const dt = ts - lastFrame;
+                lastFrame = ts;
+                update(dt, ts);
+                draw();
+                requestAnimationFrame(loop);
             }
-        }
 
-        // === LOOP ===
-        function loop(ts) {
-            const dt = ts - lastFrame;
-            lastFrame = ts;
-            update(dt, ts);
-            draw();
-            requestAnimationFrame(loop);
-        }
-
-        // === CONTROLS ===
-        const keys = {};
-        document.addEventListener('keydown', e => {
-            keys[e.key] = true;
-            if (['ArrowLeft', 'ArrowRight', ' '].includes(e.key)) e.preventDefault();
-            if (e.key === 'Escape') {
-                e.preventDefault();
-                if (shopOpen) {
-                    toggleShop(); // Close shop first
-                } else {
-                    togglePause();
+            // === CONTROLS ===
+            const keys = {};
+            document.addEventListener('keydown', e => {
+                keys[e.key] = true;
+                if (['ArrowLeft', 'ArrowRight', ' '].includes(e.key)) e.preventDefault();
+                if (e.key === 'Escape') {
+                    e.preventDefault();
+                    if (shopOpen) {
+                        toggleShop(); // Close shop first
+                    } else {
+                        togglePause();
+                    }
                 }
-            }
-            if ((e.key === 's' || e.key === 'S') && running) {
+                if ((e.key === 's' || e.key === 'S') && running) {
+                    e.preventDefault();
+                    toggleShop();
+                }
+                if (e.key === ' ' && running && !paused && !shopOpen) fireRocket();
+            });
+            document.addEventListener('keyup', e => keys[e.key] = false);
+
+            let touchX = null;
+            canvas.addEventListener('touchstart', e => {
                 e.preventDefault();
-                toggleShop();
-            }
-            if (e.key === ' ' && running && !paused && !shopOpen) fireRocket();
-        });
-        document.addEventListener('keyup', e => keys[e.key] = false);
-
-        let touchX = null;
-        canvas.addEventListener('touchstart', e => { 
-            e.preventDefault(); 
-            touchX = e.touches[0].clientX;
-            if (running && !paused && !shopOpen) firing = true; // Touch to fire
-        }, { passive: false });
-        canvas.addEventListener('touchmove', e => {
-            e.preventDefault();
-            if (touchX !== null) {
-                const nx = e.touches[0].clientX;
-                P.x += nx - touchX;
-                touchX = nx;
-                P.x = Math.max(18, Math.min(canvas.width - 18, P.x));
-            }
-        }, { passive: false });
-        canvas.addEventListener('touchend', () => {
-            touchX = null;
-            firing = false;
-        });
-
-        canvas.addEventListener('mousemove', e => {
-            if (running) {
-                const rect = canvas.getBoundingClientRect();
-                P.x = e.clientX - rect.left;
-                P.x = Math.max(18, Math.min(canvas.width - 18, P.x));
-            }
-        });
-
-        // Hold left click to fire, right click for rockets
-        canvas.addEventListener('mousedown', e => {
-            if (!running || paused || shopOpen) return;
-            if (e.button === 0) { // Left click
-                firing = true;
-            } else if (e.button === 2) { // Right click
-                fireRocket();
-            }
-        });
-
-        canvas.addEventListener('mouseup', e => {
-            if (e.button === 0) {
+                touchX = e.touches[0].clientX;
+                if (running && !paused && !shopOpen) firing = true; // Touch to fire
+            }, { passive: false });
+            canvas.addEventListener('touchmove', e => {
+                e.preventDefault();
+                if (touchX !== null) {
+                    const nx = e.touches[0].clientX;
+                    P.x += nx - touchX;
+                    touchX = nx;
+                    P.x = Math.max(18, Math.min(canvas.width - 18, P.x));
+                }
+            }, { passive: false });
+            canvas.addEventListener('touchend', () => {
+                touchX = null;
                 firing = false;
+            });
+
+            canvas.addEventListener('mousemove', e => {
+                if (running) {
+                    const rect = canvas.getBoundingClientRect();
+                    P.x = e.clientX - rect.left;
+                    P.x = Math.max(18, Math.min(canvas.width - 18, P.x));
+                }
+            });
+
+            // Hold left click to fire, right click for rockets
+            canvas.addEventListener('mousedown', e => {
+                if (!running || paused || shopOpen) return;
+                if (e.button === 0) { // Left click
+                    firing = true;
+                } else if (e.button === 2) { // Right click
+                    fireRocket();
+                }
+            });
+
+            canvas.addEventListener('mouseup', e => {
+                if (e.button === 0) {
+                    firing = false;
+                }
+            });
+
+            // Prevent context menu on right click
+            canvas.addEventListener('contextmenu', e => e.preventDefault());
+
+            function moveLoop() {
+                if (running && !paused && !shopOpen) {
+                    if (keys['ArrowLeft'] || keys['a']) P.x -= P.spd;
+                    if (keys['ArrowRight'] || keys['d']) P.x += P.spd;
+                    P.x = Math.max(18, Math.min(canvas.width - 18, P.x));
+                }
+                requestAnimationFrame(moveLoop);
             }
-        });
 
-        // Prevent context menu on right click
-        canvas.addEventListener('contextmenu', e => e.preventDefault());
-
-        function moveLoop() {
-            if (running && !paused && !shopOpen) {
-                if (keys['ArrowLeft'] || keys['a']) P.x -= P.spd;
-                if (keys['ArrowRight'] || keys['d']) P.x += P.spd;
-                P.x = Math.max(18, Math.min(canvas.width - 18, P.x));
-            }
-            requestAnimationFrame(moveLoop);
-        }
-
-        // === INIT ===
-        document.getElementById('startBtn').addEventListener('click', () => start(false));
-        document.getElementById('retryBtn').addEventListener('click', () => start(false));
-        document.getElementById('resumeBtn').addEventListener('click', () => togglePause(false));
-        document.getElementById('saveBtn').addEventListener('click', () => {
-            saveGame();
-            const status = document.getElementById('saveStatus');
-            status.textContent = '✓ GAME SAVED';
-            setTimeout(() => status.textContent = '', 2000);
-        });
-        document.getElementById('restartBtn').addEventListener('click', () => {
-            DOM.pauseScreen.classList.add('hide');
-            start(false);
-        });
-        DOM.continueBtn.addEventListener('click', () => start(true));
-        DOM.victoryRestartBtn.addEventListener('click', () => start(false));
-
-        // Shop event listeners
-        DOM.shopBtn.addEventListener('click', toggleShop);
-        DOM.buyRapid.addEventListener('click', () => buyUpgrade('rapid'));
-        DOM.buySpread.addEventListener('click', () => buyUpgrade('spread'));
-        DOM.buyDamage.addEventListener('click', () => buyUpgrade('damage'));
-        DOM.buyMulti.addEventListener('click', () => buyUpgrade('multi'));
-        DOM.buyRocket.addEventListener('click', () => buyUpgrade('rocket'));
-        
-        // Close shop when clicking outside items
-        DOM.shopScreen.addEventListener('click', (e) => {
-            if (e.target === DOM.shopScreen) toggleShop();
-        });
-
-        // Options & Help screen event listeners
-        DOM.optionsBtn.addEventListener('click', toggleOptionsScreen);
-        DOM.helpBtn.addEventListener('click', () => toggleHelpScreen(false));
-        DOM.optionsBackBtn.addEventListener('click', toggleOptionsScreen);
-        DOM.helpBackBtn.addEventListener('click', () => toggleHelpScreen());
-        DOM.pauseHelpBtn.addEventListener('click', () => toggleHelpScreen(true));
-        
-        // Fire mode options
-        DOM.optAutomatic.addEventListener('click', () => setFireMode('automatic'));
-        DOM.optManual.addEventListener('click', () => setFireMode('manual'));
-        
-        // Difficulty options
-        DOM.optEasy.addEventListener('click', () => setDifficulty('easy'));
-        DOM.optNormal.addEventListener('click', () => setDifficulty('normal'));
-        DOM.optHard.addEventListener('click', () => setDifficulty('hard'));
-        DOM.optExtreme.addEventListener('click', () => setDifficulty('extreme'));
-
-        // Load settings on startup
-        loadSettings();
-
-        // Check for saved game on load
-        const savedGame = loadGame();
-        if (savedGame) {
-            DOM.continueBtn.style.display = 'inline-block';
-        }
-
-        // Auto-pause on tab switch or window blur
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden && running && !paused) {
-                togglePause(true);
-            }
-        });
-        window.addEventListener('blur', () => {
-            if (running && !paused) {
-                togglePause(true);
-            }
-        });
-
-        // Save game when player leaves
-        window.addEventListener('beforeunload', () => {
-            if (running) {
+            // === INIT ===
+            document.getElementById('startBtn').addEventListener('click', () => start(false));
+            document.getElementById('retryBtn').addEventListener('click', () => start(false));
+            document.getElementById('resumeBtn').addEventListener('click', () => togglePause(false));
+            document.getElementById('saveBtn').addEventListener('click', () => {
                 saveGame();
-            }
-        });
+                const status = document.getElementById('saveStatus');
+                status.textContent = '✓ GAME SAVED';
+                setTimeout(() => status.textContent = '', 2000);
+            });
+            document.getElementById('restartBtn').addEventListener('click', () => {
+                DOM.pauseScreen.classList.add('hide');
+                start(false);
+            });
+            DOM.continueBtn.addEventListener('click', () => start(true));
+            DOM.victoryRestartBtn.addEventListener('click', () => start(false));
 
-        P.x = canvas.width / 2;
-        P.y = canvas.height - 70;
-        requestAnimationFrame(loop);
-        moveLoop();
-    })();
+            // Shop event listeners
+            DOM.shopBtn.addEventListener('click', toggleShop);
+            DOM.buyRapid.addEventListener('click', () => buyUpgrade('rapid'));
+            DOM.buySpread.addEventListener('click', () => buyUpgrade('spread'));
+            DOM.buyDamage.addEventListener('click', () => buyUpgrade('damage'));
+            DOM.buyMulti.addEventListener('click', () => buyUpgrade('multi'));
+            DOM.buyRocket.addEventListener('click', () => buyUpgrade('rocket'));
+
+            // Close shop when clicking outside items
+            DOM.shopScreen.addEventListener('click', (e) => {
+                if (e.target === DOM.shopScreen) toggleShop();
+            });
+
+            // Options & Help screen event listeners
+            DOM.optionsBtn.addEventListener('click', toggleOptionsScreen);
+            DOM.helpBtn.addEventListener('click', () => toggleHelpScreen(false));
+            DOM.optionsBackBtn.addEventListener('click', toggleOptionsScreen);
+            DOM.helpBackBtn.addEventListener('click', () => toggleHelpScreen());
+            DOM.pauseHelpBtn.addEventListener('click', () => toggleHelpScreen(true));
+
+            // Fire mode options
+            DOM.optAutomatic.addEventListener('click', () => setFireMode('automatic'));
+            DOM.optManual.addEventListener('click', () => setFireMode('manual'));
+
+            // Difficulty options
+            DOM.optEasy.addEventListener('click', () => setDifficulty('easy'));
+            DOM.optNormal.addEventListener('click', () => setDifficulty('normal'));
+            DOM.optHard.addEventListener('click', () => setDifficulty('hard'));
+            DOM.optExtreme.addEventListener('click', () => setDifficulty('extreme'));
+
+            // Load settings on startup
+            loadSettings();
+
+            // Check for saved game on load
+            const savedGame = loadGame();
+            if (savedGame) {
+                DOM.continueBtn.style.display = 'inline-block';
+            }
+
+            // Auto-pause on tab switch or window blur
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden && running && !paused) {
+                    togglePause(true);
+                }
+            });
+            window.addEventListener('blur', () => {
+                if (running && !paused) {
+                    togglePause(true);
+                }
+            });
+
+            // Save game when player leaves
+            window.addEventListener('beforeunload', () => {
+                if (running) {
+                    saveGame();
+                }
+            });
+
+            P.x = canvas.width / 2;
+            P.y = canvas.height - 70;
+            requestAnimationFrame(loop);
+            moveLoop();
+        })();
     </script>
 </body>
+
 </html>
