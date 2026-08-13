@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Neon Wings</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap"
-        rel="stylesheet">
     <style>
         :root {
             --cyan: #00ffff;
@@ -32,7 +30,7 @@
                 radial-gradient(ellipse at 50% 0%, rgba(0, 100, 150, 0.15) 0%, transparent 50%),
                 radial-gradient(ellipse at 50% 100%, rgba(100, 0, 80, 0.1) 0%, transparent 40%);
             overflow: hidden;
-            font-family: 'Share Tech Mono', monospace;
+            font-family: Consolas, 'Courier New', monospace;
             color: #fff;
             touch-action: none;
             user-select: none;
@@ -2561,6 +2559,11 @@
             moveLoop();
         })();
     </script>
+    <nav style="position:fixed;right:10px;bottom:10px;z-index:10000;padding:8px 12px;border:1px solid #00ffff55;border-radius:999px;background:#0a0a12ee;font:12px Consolas,monospace" aria-label="Legal and storage information">
+        <a style="color:#00ffff" href="/privacy/">Privacy</a> ·
+        <a style="color:#00ffff" href="/cookies/">Local saves</a> ·
+        <a style="color:#00ffff" href="/terms/">Terms</a>
+    </nav>
 </body>
 
 </html>
